@@ -1,4 +1,4 @@
-// Last updated: 9/17/2025, 12:00:18 PM
+// Last updated: 9/17/2025, 12:00:29 PM
 class Solution {
     public int lengthOfLIS(int[] nums) {
         List<Integer> ls = new ArrayList<>();
@@ -22,7 +22,6 @@ class Solution {
             else{
                 ls.set(ind,num);
             }
-            //System.out.println(ls);
         }
         return ls.size();
     }
