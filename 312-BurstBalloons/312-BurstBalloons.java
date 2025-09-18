@@ -1,24 +1,32 @@
-// Last updated: 8/1/2025, 7:09:17 AM
+// Last updated: 9/18/2025, 12:19:31 PM
 class Solution {
     public int maxCoins(int[] nums) {
-        List<Integer> ls = new ArrayList<>();
-        ls.add(1);
-        for (int num : nums){
-            ls.add(num);
+        int n = nums.length;
+        int[] arr = new int[n+2];
+        for (int i=0 ; i<n ; i++){
+            arr[i+1] = nums[i];
         }
-        ls.add(1);
-        int n = ls.size();
-        int[][] dp = new int[n][n];
-        for (int i=n-1 ; i>=0 ; i--){
-            for (int j=i+2 ; j<n ; j++){
-                int maxcoins = 0;
-                for (int ind=i+1 ; ind<j ; ind++){
-                    int coins = dp[i][ind] + dp[ind][j] + ls.get(i)*ls.get(ind)*ls.get(j);
-                    maxcoins = Math.max(maxcoins,coins);
-                }
-                dp[i][j] = maxcoins;
-            }
+        arr[0] = arr[n+1] = 1;
+        int[][] dp = new int[n+2][n+2];
+        for (int[] a : dp){
+            Arrays.fill(a,-1);
         }
-        return dp[0][n-1];
+        return Burst_Coin(arr,0,n+1,dp);
+    }
+    public int Burst_Coin(int[] arr, int i, int j, int[][] dp){
+        if (j-i+1==2){
+            return 0;
+        }
+        if (dp[i][j]!=-1){
+            return dp[i][j];
+        }
+        int currMax = 0;
+        for (int k=i+1 ; k<j ; k++){
+             int left = Burst_Coin(arr,i,k,dp);
+             int right = Burst_Coin(arr,k,j,dp);
+             int self = arr[i]*arr[k]*arr[j];
+             currMax = Math.max(left+right+self,currMax);
+        }
+        return dp[i][j] = currMax;
     }
 }
