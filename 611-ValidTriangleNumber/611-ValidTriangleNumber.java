@@ -1,4 +1,4 @@
-// Last updated: 8/1/2025, 7:07:56 AM
+// Last updated: 9/26/2025, 5:56:16 AM
 class Solution {
     public int triangleNumber(int[] nums) {
         int c=0;
