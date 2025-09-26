@@ -1,4 +1,4 @@
-// Last updated: 8/1/2025, 7:10:09 AM
+// Last updated: 9/26/2025, 2:46:29 PM
 class Solution {
     public int countPrimes(int n) {
         if (n<2){
