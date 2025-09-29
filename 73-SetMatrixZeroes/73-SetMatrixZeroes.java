@@ -1,4 +1,4 @@
-// Last updated: 9/29/2025, 11:15:57 AM
+// Last updated: 9/29/2025, 11:16:03 AM
 class Solution {
     public void setZeroes(int[][] matrix) {
         boolean first_r_0 = false;
@@ -25,9 +25,6 @@ class Solution {
                 }
             }
         }
-        // for (int[] a : matrix){
-        //     System.out.println(Arrays.toString(a));
-        // }
         for (int i=1 ; i<m ; i++){
             if (matrix[i][0]==0){
                 for (int j=0 ; j<n ; j++){
