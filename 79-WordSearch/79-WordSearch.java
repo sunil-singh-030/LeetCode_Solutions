@@ -1,47 +1,44 @@
-// Last updated: 8/1/2025, 7:11:44 AM
+// Last updated: 9/29/2025, 1:48:24 PM
 class Solution {
-    static boolean flag = false;
     public boolean exist(char[][] board, String word) {
-        flag = false;
-        List<Integer> row = new ArrayList<>();
-        List<Integer> col = new ArrayList<>();
-        for (int i=0 ; i<board.length ; i++){
-            for (int j=0 ; j<board[0].length ; j++){
-                if (board[i][j]==word.charAt(0)){
-                    row.add(i);
-                    col.add(j);
+        int m = board.length;
+        int n = board[0].length;
+        for (int i=0 ; i<m ; i++){
+            for (int j=0 ; j<n ; j++){
+                int[][] isvalid = new int[m][n];
+                boolean[] found = new boolean[1];
+                if (isExist(board,i,j,word,0,isvalid,found)){
+                    return true;
                 }
-            }
-        }
-        int [][] grid = new int[board.length][board[0].length];
-        for (int i=0 ; i<row.size() ; i++){
-            check(board,grid,row.get(i),col.get(i),word,0);
-            if (flag){
-                return true;
             }
         }
         return false;
     }
-    public static void check(char [][] board , int [][] grid , int r , int c , String s , int index ){
-        if (index == s.length()){
-            flag = true;
-            return;
+    public boolean isExist(char[][] board, int i, int j, String word, int idx, int[][] isvalid, boolean[] found ){
+        if (found[0]){
+            return true;
         }
-        if (r<0 || c<0 || r>=grid.length || c>=grid[0].length || grid[r][c]==1){
-            return;
+        if (idx==word.length()){
+            return true;
         }
-        if (board[r][c]!=s.charAt(index)){
-            return;
+        if (i<0 || i>=board.length || j<0 || j>=board[0].length || isvalid[i][j]==1){
+            return false;
         }
-        grid[r][c] = 1;
-        int [] rarr = {-1,0,1,0};
-        int [] carr = {0,-1,0,1};
-        for (int i=0 ; i<rarr.length ; i++){
-            check(board,grid,r+rarr[i],c+carr[i],s,index+1);
-            if (flag){
-                return;
+        
+        if (board[i][j]==word.charAt(idx)){
+            isvalid[i][j] = 1;
+            int[] r = {0,1,0,-1};
+            int[] c = {1,0,-1,0};
+            for (int k=0 ; k<4 ; k++){
+                boolean currans = isExist(board,i+r[k],j+c[k],word,idx+1,isvalid,found);
+                if (currans){
+                    found[0] = true;
+                    return true;
+                }
             }
+            isvalid[i][j] = 0;
         }
-        grid[r][c] = 0;
+        return false;
     }
+    
 }
