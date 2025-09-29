@@ -1,28 +1,32 @@
-// Last updated: 8/1/2025, 7:12:19 AM
+// Last updated: 9/29/2025, 10:50:33 AM
 class Solution {
     public void rotate(int[][] matrix) {
-        int n=matrix.length-1;
-        int rmin=0;
-        int cmin=0;
-        int rmax=n;
-        int cmax=n;
-        int c=(n+1)/2;
-        while (c-->0){
-            for (int i=0;i<n;i++){
-            int temp1=matrix[rmin][cmin+i];
-            int temp2=matrix[rmin+i][cmax];
-            int temp3=matrix[rmax][cmax-i];
-            int temp4=matrix[rmax-i][cmin];
-            matrix[rmin][cmin+i]=temp4;
-            matrix[rmin+i][cmax]=temp1;
-            matrix[rmax][cmax-i]=temp2;
-            matrix[rmax-i][cmin]=temp3;
+        int n = matrix.length;
+        int minr = 0;
+        int minc = 0;
+        int maxr = n-1;
+        int maxc = n-1;
+        int move = n/2;
+        int movecnt = n-1;
+        while (move-->0){
+            for (int i=0 ; i<movecnt ; i++){
+                int temp1 = matrix[minr][minc+i];
+                int temp2 = matrix[minr+i][maxc];
+                int temp3 = matrix[maxr][maxc-i];
+                int temp4 = matrix[maxr-i][minc];
+                matrix[minr][minc+i] = temp4;
+                matrix[minr+i][maxc] = temp1;
+                matrix[maxr][maxc-i] = temp2;
+                matrix[maxr-i][minc] = temp3;
             }
-            n-=2;
-            rmin++;
-            cmin++;
-            rmax--;
-            cmax--;
+            movecnt -= 2;
+            minr++;
+            minc++;
+            maxr--;
+            maxc--;
+            // for (int[] a : matrix){
+            //     System.out.println(Arrays.toString(a));
+            // }
         }
         
     }
