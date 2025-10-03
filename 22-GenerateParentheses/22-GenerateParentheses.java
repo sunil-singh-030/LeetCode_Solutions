@@ -1,4 +1,4 @@
-// Last updated: 8/1/2025, 7:12:50 AM
+// Last updated: 10/3/2025, 10:46:31 AM
 class Solution {
     public List<String> generateParenthesis(int n) {
         List<String> out=new ArrayList<>();
