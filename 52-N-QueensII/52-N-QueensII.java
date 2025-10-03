@@ -1,17 +1,18 @@
-// Last updated: 10/3/2025, 11:16:01 AM
+// Last updated: 10/3/2025, 11:17:23 AM
 import java.util.ArrayList;
 import java.util.List;
 
 class Solution {
+    static int cnt;
     public int totalNQueens(int n) {
-        List<List<String>> ans = new ArrayList<>();
+        cnt = 0;
         int[][] grid = new int[n][n];
-        allPossWay(grid,0,new ArrayList<>(),ans);
-        return ans.size();
+        allPossWay(grid,0,new ArrayList<>());
+        return cnt;
     }
-    public void allPossWay(int[][] grid, int idx, List<String> ls, List<List<String>> ans){
+    public void allPossWay(int[][] grid, int idx, List<String> ls){
         if (idx==grid.length){
-            ans.add(new ArrayList<>(ls));
+            cnt++;
             return;
         }
         for (int i=0 ; i<grid.length ; i++){
@@ -22,7 +23,7 @@ class Solution {
                 int len = ls.size();
                 ls.add(str);
                 grid[idx][i] = 1;
-                allPossWay(grid,idx+1,ls,ans);
+                allPossWay(grid,idx+1,ls);
                 grid[idx][i] = 0;
                 ls.remove(len);
             }
