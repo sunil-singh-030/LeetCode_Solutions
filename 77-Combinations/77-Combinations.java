@@ -1,4 +1,4 @@
-// Last updated: 10/4/2025, 7:02:41 AM
+// Last updated: 10/4/2025, 7:02:54 AM
 class Solution {
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> ls = new ArrayList<>();
