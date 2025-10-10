@@ -1,60 +1,57 @@
-// Last updated: 10/10/2025, 12:31:51 PM
+// Last updated: 10/10/2025, 12:48:21 PM
 class Solution {
     public String removeSubstring(String s, int k) {
-        int n = s.length();
-        int[][] state = new int[n][2];
-        int cnt1 = 0;
-        int cnt2 = 0;
-        Stack<Integer> st = new Stack<>();
-        for (int i=0 ; i<n ; i++){
-            char ch = s.charAt(i);
-            st.push(i);
-            if (ch=='('){
-                if (cnt2==0){
-                    cnt1++;
-                }
-                else{
-                    cnt1 = 1;
-                    cnt2 = 0;
-                }
-            }
-            else{
-                if (cnt1>0){
-                    cnt2++;
-                }
-                else{
-                    cnt1 = 0;
-                    cnt2 = 0;
-                }
-            }
-            state[i][0] = cnt1;
-            state[i][1] = cnt2;
-            if (cnt1>=cnt2 && cnt2==k){
-                int ind = -1;
-                int move = 2*k;
-                while (move-->0){
-                    ind = st.pop();
-                }
-                ind--;
-                if (cnt1>cnt2){
-                    cnt1 -= cnt2;
-                    cnt2 = 0;
-                }
-                else if (ind>0){
-                    cnt1 = state[ind][0];
-                    cnt2 = state[ind][1];
-                }
-                else{
-                    cnt1 = 0;
-                    cnt2 = 0;
+        char[] stack = new char[s.length()];
+        int top = 0;
+        boolean falseAlarm = false;
+        int countR = 0;
+        boolean changed = true;
+        char[] str = s.toCharArray();
+        int start;
+        while (changed) {
+            // println("str = " + str)
+            changed = false;
+            countR = 0;
+            for (char c : str) {
+                // println("c = " + c + ", countR = " + countR + ", top = " + top + ", changed = " + changed)
+                if (c == '(') {
+                    stack[top++] = c;
+                    countR = 0;
+                } else {
+                    countR++;
+                    if (countR == k) {
+                        // go back and look for k (
+                        start = top - (k  - 1) - k;
+                        if (start >= 0) {
+                            falseAlarm = false;
+                            for (int y = start; y < start + k; y++) {
+                                // println("looking at " + stack[y])
+                                if (stack[y] == ')') {
+                                    falseAlarm = true;
+                                    break;
+                                }
+                            }
+                            if (!falseAlarm) {
+                                // pop from stack
+                                top = start;
+                                changed = true;
+                            } else {
+                                stack[top++] = c;
+                            }
+                            countR = 0;
+                        } else {
+                            stack[top++] = c;    
+                        }
+                    } else {
+                        stack[top++] = c;
+                    }
                 }
             }
-            
+            // println("str = " + str + ", top = " + top)
+            str = Arrays.copyOfRange(stack, 0, top);
+            // println("str = " + str)
+            top = 0;
         }
-        StringBuilder out = new StringBuilder();
-        while (!st.isEmpty()){
-            out.insert(0,s.charAt(st.pop()));
-        }
-        return out.toString();
+        return new String(str);
     }
 }
