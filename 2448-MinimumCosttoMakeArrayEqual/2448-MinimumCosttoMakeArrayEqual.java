@@ -1,4 +1,4 @@
-// Last updated: 10/14/2025, 10:39:30 AM
+// Last updated: 10/14/2025, 10:40:26 AM
 class Solution {
     public long minCost(int[] nums, int[] cost) {
         long minCost = Long.MAX_VALUE;
