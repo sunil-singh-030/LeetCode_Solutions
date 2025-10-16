@@ -1,0 +1,44 @@
+// Last updated: 10/16/2025, 10:46:48 AM
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        int n = graph.length;
+        HashSet<Integer> visited = new HashSet<>();
+        for (int i=0 ; i<n ; i++){
+            if (visited.contains(i)) continue;
+            HashSet<Integer> seta = new HashSet<>();
+            HashSet<Integer> setb = new HashSet<>();
+            Queue<Integer> q = new LinkedList<>();
+            q.offer(i);
+            seta.add(i);
+            while (!q.isEmpty()){
+                // 1
+                int currNode = q.poll();
+
+                // 2
+                if (visited.contains(currNode)) continue;
+
+                // 3
+                visited.add(currNode);
+                // 4
+
+                // 5
+                int[] nbrs = graph[currNode];
+                for (int j=0 ; j<nbrs.length ; j++){
+                    if (!visited.contains(nbrs[j])){
+                        if (seta.contains(currNode)){
+                            if (seta.contains(nbrs[j])) return false;
+                            q.offer(nbrs[j]);
+                            setb.add(nbrs[j]);
+                        }
+                        else{
+                            if (setb.contains(nbrs[j])) return false;
+                            q.offer(nbrs[j]);
+                            seta.add(nbrs[j]);
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
