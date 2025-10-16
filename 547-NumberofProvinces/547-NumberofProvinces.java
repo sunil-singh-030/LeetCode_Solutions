@@ -1,22 +1,7 @@
-// Last updated: 10/16/2025, 9:37:27 AM
+// Last updated: 10/16/2025, 9:40:52 AM
 class Solution {
     public int findCircleNum(int[][] isConnected) {
         int n = isConnected.length;
-        HashMap<Integer,List<Integer>> map = new HashMap<>();
-        for (int i=1 ; i<=n ; i++){
-            map.put(i,new ArrayList<>());
-        }
-        for (int i=0 ; i<n; i++){
-            int v1 = i+1;
-            for (int j=0 ; j<n ; j++){
-                if (isConnected[i][j]==1 && i!=j){
-                    int v2 = j+1;
-                    map.get(v1).add(v2);
-                    map.get(v2).add(v1);
-                }
-            }
-        }
-
         int cntProvinces = 0;
         HashSet<Integer> visited = new HashSet<>();
         for (int i=1 ; i<=n ; i++){
@@ -37,9 +22,9 @@ class Solution {
                 // 4 self work
 
                 // add unvisited nbrs
-                for (int nbr : map.get(currNode)){
-                    if (!visited.contains(nbr)){
-                        q.offer(nbr);
+                for (int j=0 ; j<n ; j++){ 
+                    if ( (j+1!=currNode) && isConnected[currNode-1][j]==1 && !visited.contains(j+1)){
+                        q.offer(j+1);
                     }
                 }
 
