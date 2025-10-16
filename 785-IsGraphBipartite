@@ -1,42 +1,45 @@
-// Last updated: 10/16/2025, 10:46:48 AM
+// Last updated: 10/16/2025, 11:35:31 AM
 class Solution {
+    class Pair{
+        int node;
+        int dis;
+        public  Pair(int n, int dis){
+            this.node = n;
+            this.dis = dis;
+        }
+    }
     public boolean isBipartite(int[][] graph) {
+        // if no cycle -> always bipartite , if cycle -> if odd len then no else bipartite
         int n = graph.length;
-        HashSet<Integer> visited = new HashSet<>();
+        HashMap<Integer,Integer> map = new HashMap<>();
         for (int i=0 ; i<n ; i++){
-            if (visited.contains(i)) continue;
-            HashSet<Integer> seta = new HashSet<>();
-            HashSet<Integer> setb = new HashSet<>();
-            Queue<Integer> q = new LinkedList<>();
-            q.offer(i);
-            seta.add(i);
+            if (map.containsKey(i)) continue;
+            Queue<Pair> q = new LinkedList<>();
+            q.offer(new Pair(i,0));
             while (!q.isEmpty()){
                 // 1
-                int currNode = q.poll();
+                Pair currPair = q.poll();
+                int currNode = currPair.node;
+                int dis = currPair.dis;
 
                 // 2
-                if (visited.contains(currNode)) continue;
+                if (map.containsKey(currNode)) {
+                    if (dis!=map.get(currNode)) return false;
+                    continue;
+                }
 
                 // 3
-                visited.add(currNode);
+                map.put(currNode,dis);
                 // 4
 
                 // 5
                 int[] nbrs = graph[currNode];
                 for (int j=0 ; j<nbrs.length ; j++){
-                    if (!visited.contains(nbrs[j])){
-                        if (seta.contains(currNode)){
-                            if (seta.contains(nbrs[j])) return false;
-                            q.offer(nbrs[j]);
-                            setb.add(nbrs[j]);
-                        }
-                        else{
-                            if (setb.contains(nbrs[j])) return false;
-                            q.offer(nbrs[j]);
-                            seta.add(nbrs[j]);
-                        }
+                    if (!map.containsKey(nbrs[j])){
+                        q.offer(new Pair(nbrs[j],dis+1));
                     }
                 }
+
             }
         }
         return true;
