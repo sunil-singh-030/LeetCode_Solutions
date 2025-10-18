@@ -1,4 +1,4 @@
-// Last updated: 10/18/2025, 12:51:09 PM
+// Last updated: 10/18/2025, 12:57:59 PM
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -11,18 +11,25 @@
  */
 class Solution {
     public ListNode middleNode(ListNode head) {
-         ListNode temp = head;
-         int len = 0;
-         while (temp!=null){
-            len++;
-            temp = temp.next;
+        if (head.next==null){
+            return head;
+        }
+        if (head.next.next==null){
+            return head.next;
+        }
+         ListNode slow = head;
+         ListNode fast = head;
+         boolean incr = false;
+         while (fast.next!=null && fast.next.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if (fast.next!=null && fast.next.next==null){
+                incr = true;
+            }
          }
-         int req = len/2;
-         temp = head;
-         while (req>0){
-            temp = temp.next;
-            req--;
+         if (incr){
+            slow = slow.next;
          }
-         return temp;
+         return slow;
     }
 }
