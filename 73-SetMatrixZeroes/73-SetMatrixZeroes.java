@@ -1,4 +1,4 @@
-// Last updated: 10/18/2025, 12:34:06 PM
+// Last updated: 10/18/2025, 12:35:00 PM
 class Solution {
     public void setZeroes(int[][] matrix) {
         int m = matrix.length;
@@ -8,11 +8,13 @@ class Solution {
         for (int i=0 ; i<n ; i++){
             if (matrix[0][i]==0){
                 firstrowHasZero = true;
+                break;
             }
         }
         for (int i=0 ; i<m ; i++){
             if (matrix[i][0]==0){
                 firstcolHasZero = true;
+                break;
             }
         }
         for (int i=0 ; i<m ; i++){
