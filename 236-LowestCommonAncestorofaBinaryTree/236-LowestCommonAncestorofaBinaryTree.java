@@ -1,4 +1,4 @@
-// Last updated: 10/19/2025, 1:13:11 PM
+// Last updated: 10/19/2025, 1:28:54 PM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -9,33 +9,25 @@
  * }
  */
 class Solution {
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if (root==null){
-		return null;
-	}
-	if (root.val==p.val || root.val==q.val){
-		return root;
-	}
-	
-	boolean leftSubTree = checkPandQ(root.left,p,q);
-	if (!leftSubTree){
-		return lowestCommonAncestor(root.right,p,q);
-	}
-	Boolean rightSubTree = checkPandQ(root.right,p,q);
-	if (rightSubTree){
-		return root;
-	}
-	return lowestCommonAncestor(root.left,p,q);
-    }
-    public boolean checkPandQ(TreeNode curr, TreeNode p ,TreeNode q){
-	if (curr==null){
-		return false;
-	}
-	
-	if (curr.val==p.val || curr.val==q.val){
-		return true;
-	}
-	return checkPandQ(curr.left,p,q) || checkPandQ(curr.right,p,q);
-}
+    TreeNode ans = null;
 
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        dfs(root, p, q);
+        return ans;
+    }
+
+    private boolean dfs(TreeNode curr, TreeNode p, TreeNode q) {
+        if (curr == null) return false;
+
+        boolean left = dfs(curr.left, p, q);
+        boolean right = dfs(curr.right, p, q);
+        boolean mid = (curr == p || curr == q);
+
+        // If any two of the three flags are true, current node is LCA
+        if ((mid && left) || (mid && right) || (left && right)) {
+            ans = curr;
+        }
+
+        return mid || left || right;
+    }
 }
