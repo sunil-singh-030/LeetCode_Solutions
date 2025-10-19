@@ -1,4 +1,4 @@
-// Last updated: 8/1/2025, 7:11:25 AM
+// Last updated: 10/19/2025, 10:38:33 AM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -16,19 +16,23 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-        return check(root.left,root.right);
+        return isTreeSymmetric(root.left,root.right);
     }
-    public static boolean check(TreeNode node1, TreeNode node2){
-        if (node1==null && node2==null){
-            return true;
-        }
-        if (node1==null || node2==null){
-            return false;
-        }
-        if (node1.val!=node2.val){
-            return false;
-        }
-        return check(node1.left,node2.right) && check(node1.right,node2.left);
+    public boolean isTreeSymmetric(TreeNode node1, TreeNode node2){
+	
+	if (node1==null && node2==null){
+		return true;
+	}
+    if (node1==null || node2==null){
+        return false;
     }
+	if (node1.val!=node2.val){
+		return false;
+	}
+	if ((node1.left==null && node2.right!=null) || (node1.right==null && node2.left!=null)){
+		return false;
+	}
+	return isTreeSymmetric(node1.left,node2.right) && isTreeSymmetric(node1.right,node2.left);
+}
     
 }
