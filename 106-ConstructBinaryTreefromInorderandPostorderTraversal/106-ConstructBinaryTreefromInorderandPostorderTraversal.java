@@ -1,4 +1,4 @@
-// Last updated: 10/19/2025, 4:00:32 PM
+// Last updated: 10/19/2025, 4:00:46 PM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -24,7 +24,7 @@ class Solution {
 	return buildTree(inOrderMap,inOrder,0,n-1,postOrder,0,n-1);
     }
     public TreeNode buildTree(HashMap<Integer,Integer> inOrderMap, int[] inOrder, int stIdxIn , int endIdxIn, int[] postOrder, int stIdxPos, int endIdxPos){
-	if (stIdxPos>endIdxPos || stIdxIn>endIdxIn){
+	if (stIdxPos>endIdxPos){
 		return null;
 	}
 	TreeNode root = new TreeNode(postOrder[endIdxPos]);
