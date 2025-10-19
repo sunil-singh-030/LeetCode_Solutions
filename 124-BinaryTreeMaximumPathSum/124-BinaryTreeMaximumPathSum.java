@@ -1,4 +1,4 @@
-// Last updated: 10/19/2025, 9:34:02 AM
+// Last updated: 10/19/2025, 9:36:24 AM
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -15,20 +15,38 @@
  * }
  */
 class Solution {
-    public int maxPathSum(TreeNode root) {
-        int[] maxsum = new int[1];
-        maxsum[0] = Integer.MIN_VALUE;
-        maxSumHeight(root,maxsum);
-        return maxsum[0];
-    }
-    public static int maxSumHeight(TreeNode currnode , int[] maxsum){
-        if (currnode==null){
+    public int maxPathSum(TreeNode curr) {
+        if (curr==null){
             return 0;
         }
-        int currsum = currnode.val;
-        int leftsum = Math.max(0,maxSumHeight(currnode.left,maxsum));
-        int rightsum = Math.max(0,maxSumHeight(currnode.right,maxsum));
-        maxsum[0] = Math.max(maxsum[0],currsum+leftsum+rightsum);
-        return currsum + Math.max(leftsum,rightsum);
+        
+        int currSum = curr.val;
+        int leftMax = MaxSum(curr.left);
+        int rightMax = MaxSum(curr.right);
+        if (leftMax>0){
+            currSum = currSum + Math.max(leftMax,leftMax+rightMax);
+        }
+        else{
+            currSum = Math.max(currSum,currSum+rightMax);
+        }
+        int left = Integer.MIN_VALUE;
+        int right = Integer.MIN_VALUE;
+        if (curr.left!=null){
+            left = maxPathSum(curr.left);
+        }
+        if (curr.right!=null){
+            right = maxPathSum(curr.right);
+        }
+        return Math.max(Math.max(left,right),currSum);
     }
+    public int MaxSum(TreeNode curr){
+        if (curr==null){
+            return 0;
+        }
+        int sum1 = curr.val;
+        int leftSum = MaxSum(curr.left);
+        int rightSum = MaxSum(curr.right);
+        return Math.max(sum1,sum1 + Math.max(leftSum,rightSum));
+    }
+
 }
