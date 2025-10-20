@@ -1,4 +1,4 @@
-// Last updated: 10/20/2025, 5:22:36 PM
+// Last updated: 10/20/2025, 5:23:13 PM
 class Solution {
     class Pair{
         String s;
@@ -51,7 +51,6 @@ class Solution {
                 }
             }
         } 
-        System.out.println(adjMap);
         HashSet<String> visited = new HashSet<>();
         Queue<Pair> q = new LinkedList<>();
         q.offer(new Pair(beginWord,1));
