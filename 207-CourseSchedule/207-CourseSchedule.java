@@ -1,4 +1,4 @@
-// Last updated: 10/20/2025, 4:09:03 PM
+// Last updated: 10/20/2025, 4:10:23 PM
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         List<List<Integer>> adjList = new ArrayList<>();
@@ -9,20 +9,7 @@ class Solution {
             adjList.get(preReq[1]).add(preReq[0]);
         }
         if (hasCycle(adjList,numCourses)) return false;
-        HashSet<Integer> visited = new HashSet<>();
-        for (int i=0 ; i<numCourses ; i++){
-            if (visited.contains(i)) continue;
-            dfs(adjList,visited,i);
-        }
-        return visited.size()==numCourses ? true : false;
-    }
-    public void dfs(List<List<Integer>> adjList,HashSet<Integer> visited,int stNode){
-        visited.add(stNode);
-        for (int nbr : adjList.get(stNode)){
-            if (!visited.contains(nbr)){
-                dfs(adjList,visited,nbr);
-            }
-        }
+        return true;
     }
     public boolean hasCycle(List<List<Integer>> adjList, int numCourses){
         int[] visited = new int[numCourses];
