@@ -1,32 +1,52 @@
-// Last updated: 10/20/2025, 3:23:26 PM
+// Last updated: 10/20/2025, 4:09:03 PM
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         List<List<Integer>> adjList = new ArrayList<>();
-        for (int i = 0; i < numCourses; i++) adjList.add(new ArrayList<>());
-        for (int[] pre : prerequisites) adjList.get(pre[1]).add(pre[0]);
-        
-        boolean[] visited = new boolean[numCourses];
-        boolean[] onPath = new boolean[numCourses]; // tracks recursion stack
-        
-        for (int i = 0; i < numCourses; i++) {
-            if (!visited[i]) {
-                if (hasCycleDFS(i, adjList, visited, onPath)) return false;
+        for (int i=0 ; i<numCourses ; i++){
+            adjList.add(new ArrayList<>());
+        }
+        for (int[] preReq : prerequisites){
+            adjList.get(preReq[1]).add(preReq[0]);
+        }
+        if (hasCycle(adjList,numCourses)) return false;
+        HashSet<Integer> visited = new HashSet<>();
+        for (int i=0 ; i<numCourses ; i++){
+            if (visited.contains(i)) continue;
+            dfs(adjList,visited,i);
+        }
+        return visited.size()==numCourses ? true : false;
+    }
+    public void dfs(List<List<Integer>> adjList,HashSet<Integer> visited,int stNode){
+        visited.add(stNode);
+        for (int nbr : adjList.get(stNode)){
+            if (!visited.contains(nbr)){
+                dfs(adjList,visited,nbr);
             }
         }
-        return true;
     }
-
-    private boolean hasCycleDFS(int node, List<List<Integer>> adj, boolean[] visited, boolean[] onPath) {
-        if (onPath[node]) return true; // cycle detected
-        if (visited[node]) return false; // already processed
-        
-        onPath[node] = true;
-        for (int nbr : adj.get(node)) {
-            if (hasCycleDFS(nbr, adj, visited, onPath)) return true;
+    public boolean hasCycle(List<List<Integer>> adjList, int numCourses){
+        int[] visited = new int[numCourses];
+        int[] pathVisited = new int[numCourses];
+        for (int i=0 ; i<numCourses ; i++){
+            if (visited[i]==1) continue;
+            if (dfsDirectedGraph(i,visited,pathVisited,adjList)) {
+                return true;
+            }
         }
-        onPath[node] = false;
-        visited[node] = true; // mark completely processed
         return false;
     }
-
+    public boolean dfsDirectedGraph(int currNode, int[] visited, int[] pathVisited, List<List<Integer>> adjList){
+        visited[currNode] = 1;
+        pathVisited[currNode] = 1;
+        for (int nbr : adjList.get(currNode)){
+            if (visited[nbr]==0){
+                if (dfsDirectedGraph(nbr,visited,pathVisited,adjList)) return true;
+            }
+            else if (pathVisited[nbr]==1){
+                return true;
+            }
+        }
+        pathVisited[currNode] = 0;
+        return false;
+    }
 }
