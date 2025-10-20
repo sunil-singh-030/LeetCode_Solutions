@@ -1,39 +1,38 @@
-// Last updated: 10/20/2025, 4:10:23 PM
+// Last updated: 10/20/2025, 4:50:32 PM
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int[] inDegree = new int[numCourses];
         List<List<Integer>> adjList = new ArrayList<>();
         for (int i=0 ; i<numCourses ; i++){
             adjList.add(new ArrayList<>());
         }
         for (int[] preReq : prerequisites){
             adjList.get(preReq[1]).add(preReq[0]);
+            inDegree[preReq[0]]++;
         }
-        if (hasCycle(adjList,numCourses)) return false;
-        return true;
-    }
-    public boolean hasCycle(List<List<Integer>> adjList, int numCourses){
-        int[] visited = new int[numCourses];
-        int[] pathVisited = new int[numCourses];
-        for (int i=0 ; i<numCourses ; i++){
-            if (visited[i]==1) continue;
-            if (dfsDirectedGraph(i,visited,pathVisited,adjList)) {
-                return true;
+        Queue<Integer> q = new LinkedList<>();
+        for (int i=0 ; i<inDegree.length ; i++){
+            if (inDegree[i]==0) q.offer(i);
+        }
+        HashSet<Integer> visited = new HashSet<>();
+        while (!q.isEmpty()){
+            // remove
+            int currNode = q.poll();
+            // ignore
+            if (visited.contains(currNode)){
+                continue;
+            }
+            // mark visited
+            visited.add(currNode);
+            // add those nbr whose indegree is 0
+            for (int nbr : adjList.get(currNode)){
+                inDegree[nbr]--;
+                if (inDegree[nbr]==0){
+                    q.offer(nbr);
+                }
             }
         }
-        return false;
+        return visited.size()==numCourses ? true : false;
     }
-    public boolean dfsDirectedGraph(int currNode, int[] visited, int[] pathVisited, List<List<Integer>> adjList){
-        visited[currNode] = 1;
-        pathVisited[currNode] = 1;
-        for (int nbr : adjList.get(currNode)){
-            if (visited[nbr]==0){
-                if (dfsDirectedGraph(nbr,visited,pathVisited,adjList)) return true;
-            }
-            else if (pathVisited[nbr]==1){
-                return true;
-            }
-        }
-        pathVisited[currNode] = 0;
-        return false;
-    }
+    
 }
