@@ -1,4 +1,4 @@
-// Last updated: 8/1/2025, 7:07:41 AM
+// Last updated: 10/21/2025, 12:41:37 PM
 class Solution {
     public boolean checkValidString(String s) {
         Stack<Integer> open = new Stack<>();
