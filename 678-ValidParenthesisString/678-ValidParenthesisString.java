@@ -1,31 +1,23 @@
-// Last updated: 10/21/2025, 12:41:37 PM
-class Solution {
+// Last updated: 10/21/2025, 12:44:22 PM
+public class Solution {
     public boolean checkValidString(String s) {
-        Stack<Integer> open = new Stack<>();
-        Stack<Integer> star = new Stack<>();
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-            if (ch == '(') {
-                open.push(i);
-            } else if (ch == '*') {
-                star.push(i);
-            } else { 
-                if (!open.isEmpty()) {
-                    open.pop();
-                } else if (!star.isEmpty()) {
-                    star.pop();
-                } else {
-                    return false;
-                }
-            }
-        }
+        int leftMin = 0, leftMax = 0;
 
-        while (!open.isEmpty() && !star.isEmpty()) {
-            if (open.pop() > star.pop()) {
-                return false;
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                leftMin++;
+                leftMax++;
+            } else if (c == ')') {
+                leftMin--;
+                leftMax--;
+            } else {
+                leftMin--;
+                leftMax++;
             }
+            if (leftMax < 0) return false;
+            if (leftMin < 0) leftMin = 0;
         }
-
-        return open.isEmpty();
+        
+        return leftMin == 0;
     }
 }
