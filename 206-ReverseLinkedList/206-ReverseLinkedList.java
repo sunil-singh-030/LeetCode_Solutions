@@ -1,4 +1,4 @@
-// Last updated: 10/22/2025, 8:12:04 AM
+// Last updated: 10/22/2025, 8:26:59 AM
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -14,17 +14,16 @@ class Solution {
         if (head==null){
             return null;
         }
-        return helper(head,head.next);
-    }
-    public ListNode helper(ListNode parent , ListNode child){
-        if (child==null){
-            return parent;
+        ListNode parent = null;
+        ListNode child = head;
+        while (child!=null){
+            ListNode nextNode = child.next;
+            ListNode temp = child;
+            child.next = parent;
+            parent = temp;
+            child = nextNode;
         }
-        ListNode newHead =  helper(child,child.next);
-        ListNode temp = child;
-        parent.next = null;
-        child.next = parent;
-        return newHead;
+        return parent;
     }
-
+    
 }
