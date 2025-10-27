@@ -1,4 +1,4 @@
-// Last updated: 10/26/2025, 9:57:38 PM
+// Last updated: 10/27/2025, 3:38:39 PM
 class Solution {
     public int maxProduct(int[] nums) {
         int n = nums.length;
