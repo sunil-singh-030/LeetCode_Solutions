@@ -1,4 +1,4 @@
-// Last updated: 10/29/2025, 9:32:11 AM
+// Last updated: 10/29/2025, 9:32:40 AM
 class Solution {
     public int smallestNumber(int n) {
         int left = 0;
@@ -6,7 +6,7 @@ class Solution {
         int ans = n;
         while (left<=right){
             int mid = (left+right)/2;
-            int currNum = binToNum(mid);
+            int currNum = ((int) Math.pow(2,mid))-1;
             if (currNum==n){
                 return n;
             }
@@ -20,8 +20,4 @@ class Solution {
         }
         return ans;
     }
-    public int binToNum(int cntOfOne){
-        return ((int) Math.pow(2,cntOfOne))-1;
-    }
-    
 }
