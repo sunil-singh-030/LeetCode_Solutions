@@ -1,25 +1,27 @@
-// Last updated: 10/29/2025, 9:27:29 AM
+// Last updated: 10/29/2025, 9:32:11 AM
 class Solution {
     public int smallestNumber(int n) {
-        int ans=n;
-        boolean flag=true;
-        while (flag){
-            String s=binary(n);
-            if (s.contains("0")==false){
-                ans=n;
-                flag=false;
+        int left = 0;
+        int right = 31;
+        int ans = n;
+        while (left<=right){
+            int mid = (left+right)/2;
+            int currNum = binToNum(mid);
+            if (currNum==n){
+                return n;
             }
-            n++;
+            else if (currNum>n){
+                ans = currNum;
+                right = mid-1;
+            }
+            else{
+                left = mid+1;
+            }
         }
         return ans;
     }
-    public static String  binary(int n){
-        String out="";
-        while (n>=2){
-            out= n%2 +out;
-            n/=2;
-        }
-        out= n +out;
-        return out;
+    public int binToNum(int cntOfOne){
+        return ((int) Math.pow(2,cntOfOne))-1;
     }
+    
 }
