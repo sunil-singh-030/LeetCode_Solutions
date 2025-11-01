@@ -1,4 +1,4 @@
-// Last updated: 11/1/2025, 3:35:37 PM
+// Last updated: 11/1/2025, 3:36:20 PM
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -12,28 +12,26 @@
 class Solution {
     public ListNode modifiedList(int[] nums, ListNode head) {
         HashSet<Integer> set = new HashSet<>();
-        for (int num : nums) {
+        for (int num : nums){
             set.add(num);
         }
-
-        // Dummy node to simplify head removal
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-
-        ListNode prev = dummy;
-        ListNode curr = head;
-
-        while (curr != null) {
-            if (set.contains(curr.val)) {
-                // Skip this node
-                prev.next = curr.next;
-            } else {
-                // Move prev forward only when node is kept
-                prev = curr;
-            }
-            curr = curr.next;
+        return helper(head,null,set);
+    }
+    public ListNode helper(ListNode child, ListNode parent, HashSet<Integer> set){
+        if (child==null){
+            return null;
         }
-
-        return dummy.next;
+        if (!set.contains(child.val)){
+            child.next = helper(child.next,child,set);
+            return child;
+        }
+        else{
+            if (parent==null){
+                return helper(child.next,null,set);
+            }
+            else{
+                return helper(child.next,parent,set);
+            }
+        }
     }
 }
