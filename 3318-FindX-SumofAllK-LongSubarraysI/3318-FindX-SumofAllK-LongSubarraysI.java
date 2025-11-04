@@ -1,4 +1,4 @@
-// Last updated: 11/4/2025, 12:38:28 PM
+// Last updated: 11/4/2025, 12:49:49 PM
 class Solution {
     public int[] findXSum(int[] nums, int k, int x) {
         int n = nums.length;
@@ -26,7 +26,6 @@ class Solution {
         while (temp-->0 && !pq.isEmpty()){
             int num = pq.poll();
             sum += freq[num]*num;
-            //System.out.println(num);
         }
         out[idx] = sum;
         idx++;
@@ -38,7 +37,6 @@ class Solution {
                 map.remove(nums[i-k]);
             }
             map.put(nums[i],map.getOrDefault(nums[i],0)+1);
-            //System.out.println(map);
             pq = new PriorityQueue<>((a,b)->{
                 if (freq[a]!=freq[b]){
                     return freq[b]-freq[a];
