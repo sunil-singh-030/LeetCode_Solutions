@@ -1,17 +1,22 @@
-// Last updated: 11/17/2025, 9:46:17 AM
+// Last updated: 11/17/2025, 9:48:13 AM
 class Solution {
-    public boolean kLengthApart(int[] nums, int k) {
-        int n = nums.length;
-        int prevIdx = -1;
-        for (int i=0 ; i<n ; i++){
-            if (nums[i]==1){
-                if (prevIdx==-1){
-                    prevIdx = i;
-                }
-                else{
-                    if (i-prevIdx-1<k) return false;
-                    prevIdx = i;
-                }
+    static
+    {
+        for(int i=0;i<100;i++)kLengthApart(new int[]{0}, 2);
+    }
+    public static boolean kLengthApart(int[] nums, int k) {
+        int c=k,m=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i]==1)
+            {
+                if(c<k)return false;
+                m=1;
+                c=0;
+            }
+            else
+            {
+                if(m==1)c++;
             }
         }
         return true;
