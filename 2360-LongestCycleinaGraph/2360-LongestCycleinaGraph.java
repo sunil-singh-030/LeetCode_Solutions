@@ -1,4 +1,4 @@
-// Last updated: 11/19/2025, 12:27:14 PM
+// Last updated: 11/19/2025, 12:32:19 PM
 class Solution {
     public int longestCycle(int[] edges) {
         int n = edges.length;
@@ -14,7 +14,8 @@ class Solution {
                 q.offer(i);
             }
         }
-        HashSet<Integer> visited = new HashSet<>();
+        // HashSet<Integer> visited = new HashSet<>();
+        boolean[] visited = new boolean[n];
         while (!q.isEmpty()){
             // 1
             int vtx = q.poll();
@@ -22,7 +23,7 @@ class Solution {
             // 2
 
             // 3
-            visited.add(vtx);
+            visited[vtx] = true;
 
             // 4
 
@@ -36,11 +37,11 @@ class Solution {
         }
         int maxCycle = -1;
         for (int i=0 ; i<n ; i++){
-            if (!visited.contains(i)){
+            if (!visited[i]){
                 int cnt = 1;
                 int nbrs = edges[i];
                 while (nbrs!=i){
-                    visited.add(nbrs);
+                    visited[nbrs] = true;
                     cnt++;
                     nbrs = edges[nbrs];
                 }
