@@ -1,4 +1,4 @@
-// Last updated: 11/19/2025, 12:26:27 PM
+// Last updated: 11/19/2025, 12:27:14 PM
 class Solution {
     public int longestCycle(int[] edges) {
         int n = edges.length;
@@ -8,7 +8,6 @@ class Solution {
                 inDegree[edges[i]]++;
             }
         }
-        System.out.println(Arrays.toString(inDegree));
         Queue<Integer> q = new LinkedList<>();
         for (int i=0 ; i<n ; i++){
             if (inDegree[i]==0){
