@@ -1,4 +1,4 @@
-// Last updated: 12/31/2025, 3:02:30 PM
+// Last updated: 1/1/2026, 11:44:06 AM
 1class Solution {
 2    public int findMaximumXOR(int[] nums) {
 3        // 00011 
@@ -97,31 +97,9 @@
 96            curr.isEnd = true;
 97        }
 98        
-99        public boolean search(String word) {
-100            TrieNode curr = root;
-101            for (char ch : word.toCharArray()){
-102                int idx = ch-'0';
-103                if (curr.children[idx]==null){
-104                    return false;
-105                }
-106                curr = curr.children[idx];
-107            }
-108            return curr.isEnd ;
-109        }
-110        
-111        public boolean startsWith(String prefix) {
-112            TrieNode curr = root;
-113            for (char ch : prefix.toCharArray()){
-114                int idx = ch-'0';
-115                if (curr.children[idx]==null){
-116                    return false;
-117                }
-118                curr = curr.children[idx];
-119            }
-120            return true ;
-121        }
-122    }
-123
-124
-125
-126}
+99        
+100    }
+101
+102
+103
+104}
