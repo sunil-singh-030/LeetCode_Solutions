@@ -1,17 +1,17 @@
-// Last updated: 8/1/2025, 7:11:55 AM
-class Solution {
-    public int climbStairs(int n) {
-        if (n<=2){
-            return n;
-        }
-        int curr = 2;
-        int prev = 1;
-        for (int i=3 ; i<=n ; i++){
-            int temp = prev;
-            prev = curr;
-            curr += temp;
-        }
-        return curr;
-    }
-    
-}
+// Last updated: 1/2/2026, 3:50:34 PM
+1class Solution {
+2    public int climbStairs(int n) {
+3        if (n<3){
+4            return n;
+5        }
+6        int n1 = 1;
+7        int n2 = 2;
+8        for (int i=3 ; i<=n ; i++){
+9            int temp = n1+n2;
+10            n1 = n2;
+11            n2 = temp;
+12        }
+13        return n2;
+14    }
+15    
+16}
