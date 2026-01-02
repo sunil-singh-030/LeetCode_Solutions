@@ -1,4 +1,4 @@
-// Last updated: 1/2/2026, 2:49:23 PM
+// Last updated: 1/2/2026, 2:52:15 PM
 1class Solution {
 2    public int findTheCity(int n, int[][] edges, int distanceThreshold) {
 3        List<List<int[]>> adjLs = new ArrayList<>();
@@ -26,17 +26,17 @@
 25        Arrays.fill(dist,Integer.MAX_VALUE);
 26        dist[city] = 0;
 27        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->a[1]-b[1]);
-28        HashSet<Integer> visited = new HashSet<>();
+28        boolean[] visited = new boolean[n];
 29        pq.add(new int[]{city,0});
 30        while (!pq.isEmpty()){
 31            int[] curr = pq.poll();
 32            if (curr[1] > k) break;
-33            if (visited.contains(curr[0])){
+33            if (visited[curr[0]]){
 34                continue;
 35            }
-36            visited.add(curr[0]);
+36            visited[curr[0]] = true;
 37            for (int[] edge : adjLs.get(curr[0])){
-38                if (!visited.contains(edge[0])){
+38                if (!visited[edge[0]]){
 39                    int newDist = curr[1] + edge[1];
 40                    if (newDist<dist[edge[0]]){
 41                        dist[edge[0]] = newDist;
