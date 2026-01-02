@@ -1,4 +1,4 @@
-// Last updated: 1/2/2026, 2:46:30 PM
+// Last updated: 1/2/2026, 2:49:23 PM
 1class Solution {
 2    public int findTheCity(int n, int[][] edges, int distanceThreshold) {
 3        List<List<int[]>> adjLs = new ArrayList<>();
@@ -30,28 +30,29 @@
 29        pq.add(new int[]{city,0});
 30        while (!pq.isEmpty()){
 31            int[] curr = pq.poll();
-32            if (visited.contains(curr[0])){
-33                continue;
-34            }
-35            visited.add(curr[0]);
-36            for (int[] edge : adjLs.get(curr[0])){
-37                if (!visited.contains(edge[0])){
-38                    int newDist = curr[1] + edge[1];
-39                    if (newDist<dist[edge[0]]){
-40                        dist[edge[0]] = newDist;
-41                        pq.add(new int[]{edge[0],newDist});
-42                    }
-43                }
-44            }
-45
-46        }
-47        int cnt = 0;
-48        for (int num : dist){
-49            if (num<=k){
-50                cnt++;
-51            }
-52        }
-53        return cnt;
-54    }
-55
-56}
+32            if (curr[1] > k) break;
+33            if (visited.contains(curr[0])){
+34                continue;
+35            }
+36            visited.add(curr[0]);
+37            for (int[] edge : adjLs.get(curr[0])){
+38                if (!visited.contains(edge[0])){
+39                    int newDist = curr[1] + edge[1];
+40                    if (newDist<dist[edge[0]]){
+41                        dist[edge[0]] = newDist;
+42                        pq.add(new int[]{edge[0],newDist});
+43                    }
+44                }
+45            }
+46
+47        }
+48        int cnt = 0;
+49        for (int num : dist){
+50            if (num<=k){
+51                cnt++;
+52            }
+53        }
+54        return cnt;
+55    }
+56
+57}
