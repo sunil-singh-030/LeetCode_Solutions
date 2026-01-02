@@ -1,4 +1,4 @@
-// Last updated: 1/2/2026, 2:44:12 PM
+// Last updated: 1/2/2026, 2:46:30 PM
 1class Solution {
 2    public int findTheCity(int n, int[][] edges, int distanceThreshold) {
 3        List<List<int[]>> adjLs = new ArrayList<>();
@@ -30,7 +30,7 @@
 29        pq.add(new int[]{city,0});
 30        while (!pq.isEmpty()){
 31            int[] curr = pq.poll();
-32            if (visited.contains(curr)){
+32            if (visited.contains(curr[0])){
 33                continue;
 34            }
 35            visited.add(curr[0]);
