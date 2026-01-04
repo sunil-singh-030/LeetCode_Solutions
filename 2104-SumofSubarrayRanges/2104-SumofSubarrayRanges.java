@@ -1,15 +1,17 @@
-// Last updated: 1/4/2026, 11:25:47 AM
+// Last updated: 1/4/2026, 11:27:09 AM
 1class Solution {
 2    public long subArrayRanges(int[] nums) {
 3        long ans = 0;
 4        int n = nums.length;
 5        for (int i=0 ; i<n ; i++){
-6            TreeSet<Integer> set = new TreeSet<>();
-7            for (int j=i ; j<n ; j++){
-8                set.add(nums[j]);
-9                ans += set.last()-set.first();
-10            }
-11        }
-12        return ans;
-13    }
-14}
+6            int min = nums[i];
+7            int max = nums[i];
+8            for (int j=i ; j<n ; j++){
+9                min = Math.min(min,nums[j]);
+10                max = Math.max(max,nums[j]);
+11                ans += max - min;
+12            }
+13        }
+14        return ans;
+15    }
+16}
