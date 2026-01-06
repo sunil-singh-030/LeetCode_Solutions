@@ -1,41 +1,41 @@
-// Last updated: 10/1/2025, 1:46:34 PM
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public int maxLevelSum(TreeNode root) {
-        int ans = Integer.MIN_VALUE;
-        int level = -1;
-        int idx = 1 ; 
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
-        while (!q.isEmpty()){
-            int currsum = 0;
-            int size = q.size();
-            for (int i=0 ; i<size ; i++){
-                TreeNode currNode = q.poll();
-                currsum += currNode.val;
-                if (currNode.left!=null) q.offer(currNode.left);
-                if (currNode.right!=null) q.offer(currNode.right);
-            }
-            if (currsum>ans){
-                ans = currsum;
-                level = idx;
-            }
-            idx++;
-        }
-        return level;
-    }
-}
+// Last updated: 1/6/2026, 10:23:29 AM
+1/**
+2 * Definition for a binary tree node.
+3 * public class TreeNode {
+4 *     int val;
+5 *     TreeNode left;
+6 *     TreeNode right;
+7 *     TreeNode() {}
+8 *     TreeNode(int val) { this.val = val; }
+9 *     TreeNode(int val, TreeNode left, TreeNode right) {
+10 *         this.val = val;
+11 *         this.left = left;
+12 *         this.right = right;
+13 *     }
+14 * }
+15 */
+16class Solution {
+17    public int maxLevelSum(TreeNode root) {
+18        int ans = Integer.MIN_VALUE;
+19        int level = -1;
+20        int idx = 1 ; 
+21        Queue<TreeNode> q = new LinkedList<>();
+22        q.offer(root);
+23        while (!q.isEmpty()){
+24            int currsum = 0;
+25            int size = q.size();
+26            for (int i=0 ; i<size ; i++){
+27                TreeNode currNode = q.poll();
+28                currsum += currNode.val;
+29                if (currNode.left!=null) q.offer(currNode.left);
+30                if (currNode.right!=null) q.offer(currNode.right);
+31            }
+32            if (currsum>ans){
+33                ans = currsum;
+34                level = idx;
+35            }
+36            idx++;
+37        }
+38        return level;
+39    }
+40}
