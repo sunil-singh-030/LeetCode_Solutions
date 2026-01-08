@@ -1,4 +1,4 @@
-// Last updated: 1/8/2026, 12:01:39 PM
+// Last updated: 1/8/2026, 12:02:41 PM
 1class Solution {
 2    public int maxDotProduct(int[] nums1, int[] nums2) {
 3        int[][][] dp = new int[nums1.length][nums2.length][2];
