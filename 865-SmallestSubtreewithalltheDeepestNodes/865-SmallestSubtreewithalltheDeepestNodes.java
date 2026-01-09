@@ -1,4 +1,4 @@
-// Last updated: 1/9/2026, 10:18:46 AM
+// Last updated: 1/9/2026, 10:31:27 AM
 1/**
 2 * Definition for a binary tree node.
 3 * public class TreeNode {
@@ -15,22 +15,26 @@
 14 * }
 15 */
 16class Solution {
-17    public TreeNode subtreeWithAllDeepest(TreeNode root) {
-18        if (root.left==null && root.right==null){
-19            return root;
-20        }
-21        int lmaxDepth = maxDepth(root.left);
-22        int rmaxDepth = maxDepth(root.right);
-23        if (lmaxDepth==rmaxDepth) return root;
-24        if (lmaxDepth>rmaxDepth) return subtreeWithAllDeepest(root.left);
-25        return subtreeWithAllDeepest(root.right);
-26    }
-27    public int maxDepth(TreeNode curr){
-28        if (curr==null){
-29            return 0;
-30        }
-31        int leftDepth = maxDepth(curr.left);
-32        int rightDepth = maxDepth(curr.right);
-33        return 1 + Math.max(leftDepth,rightDepth);
-34    }
-35}
+17    TreeNode ans;
+18    int currHeight;
+19    public TreeNode subtreeWithAllDeepest(TreeNode root) {
+20        ans = null;
+21        currHeight = 0;
+22        maxDepth(root,0);
+23        return ans;
+24    }
+25    public int maxDepth(TreeNode curr, int h){
+26        if (curr==null){
+27            return 0;
+28        }
+29        int leftDepth = maxDepth(curr.left,h+1);
+30        int rightDepth = maxDepth(curr.right,h+1);
+31        if (leftDepth==rightDepth){
+32            if (h+leftDepth>=currHeight){
+33                ans = curr;
+34                currHeight = h + leftDepth;
+35            }
+36        }
+37        return 1 + Math.max(leftDepth,rightDepth);
+38    }
+39}
