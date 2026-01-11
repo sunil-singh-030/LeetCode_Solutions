@@ -1,4 +1,4 @@
-// Last updated: 12/30/2025, 11:19:46 AM
+// Last updated: 1/11/2026, 7:45:18 AM
 1class Solution {
 2    class Pair{
 3        int node;
@@ -48,20 +48,18 @@
 47                q.add(new Pair(next, cp.dis + 1));
 48            }
 49        }
-50        // System.out.println(Arrays.toString(dis1));
-51        // System.out.println(Arrays.toString(dis2));
-52        int node = -1;
-53        int dis = Integer.MAX_VALUE;
-54        for (int i=0 ; i<n ; i++){
-55            if (dis1[i]!=-1 && dis2[i]!=-1){
-56                if (dis>Math.max(dis1[i],dis2[i])){
-57                    node = i;
-58                    dis = Math.max(dis1[i],dis2[i]);
-59                }
-60            }
-61        }
-62        return node;
-63        
-64        
-65    }
-66}
+50        int node = -1;
+51        int dis = Integer.MAX_VALUE;
+52        for (int i=0 ; i<n ; i++){
+53            if (dis1[i]!=-1 && dis2[i]!=-1){
+54                if (dis>Math.max(dis1[i],dis2[i])){
+55                    node = i;
+56                    dis = Math.max(dis1[i],dis2[i]);
+57                }
+58            }
+59        }
+60        return node;
+61        
+62        
+63    }
+64}
