@@ -1,4 +1,4 @@
-// Last updated: 1/2/2026, 10:49:42 AM
+// Last updated: 1/17/2026, 11:01:09 AM
 1class Solution {
 2    public int[] minimumTime(int n, int[][] edges, int[] disappear) {
 3        List<List<int[]>> adjLs = new ArrayList<>();
