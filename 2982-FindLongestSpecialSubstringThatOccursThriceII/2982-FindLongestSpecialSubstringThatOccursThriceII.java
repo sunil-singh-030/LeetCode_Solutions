@@ -1,4 +1,4 @@
-// Last updated: 1/20/2026, 11:21:28 AM
+// Last updated: 1/20/2026, 11:33:13 AM
 class Solution {
     public int maximumLength(String s) {
         int n = s.length();
