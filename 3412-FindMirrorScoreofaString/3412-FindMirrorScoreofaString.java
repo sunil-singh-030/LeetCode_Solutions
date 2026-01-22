@@ -1,4 +1,4 @@
-// Last updated: 1/22/2026, 2:31:16 PM
+// Last updated: 1/22/2026, 2:34:33 PM
 class Solution {
     public long calculateScore(String s) {
         HashMap<Character,Stack<Integer>> map = new HashMap<>();
