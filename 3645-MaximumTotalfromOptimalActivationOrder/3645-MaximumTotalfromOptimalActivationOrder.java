@@ -1,4 +1,4 @@
-// Last updated: 1/18/2026, 8:27:39 PM
+// Last updated: 1/23/2026, 10:28:18 AM
 1class Solution {
 2    public long maxTotal(int[] value, int[] limit) {
 3        long ans = 0;
