@@ -1,4 +1,4 @@
-// Last updated: 1/29/2026, 2:55:07 PM
+// Last updated: 1/29/2026, 2:59:25 PM
 1class Solution {
 2    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
 3        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->{
@@ -20,22 +20,23 @@
 19        List<List<Integer>> ans = new ArrayList<>();
 20        int m = nums1.length;
 21        int n = nums2.length;
-22        while (ans.size() < k && !pq.isEmpty()) {
+22        while (ans.size()<k){
 23            int[] cp = pq.poll();
-24            ans.add(List.of(nums1[cp[0]], nums2[cp[1]]));
-25
-26            int i = cp[0], j = cp[1];
-27
-28            if (i + 1 < m && visited.add((i + 1) + " " + j)) {
-29                pq.add(new int[]{i + 1, j, nums1[i + 1] + nums2[j]});
-30            }
-31
-32            if (j + 1 < n && visited.add(i + " " + (j + 1))) {
-33                pq.add(new int[]{i, j + 1, nums1[i] + nums2[j + 1]});
-34            }
-35        }
+24            List<Integer> temp = new ArrayList<>();
+25            temp.add(nums1[cp[0]]);
+26            temp.add(nums2[cp[1]]);
+27            ans.add(temp);
+28            if (cp[0]+1<m && !visited.contains((cp[0]+1)+" "+cp[1])){
+29                pq.add(new int[]{cp[0]+1,cp[1],nums1[cp[0]+1]+nums2[cp[1]]});
+30                visited.add((cp[0]+1)+" "+cp[1]);
+31            }
+32            if (cp[1]+1<n && !visited.contains(cp[0]+" "+(cp[1]+1))){
+33                pq.add(new int[]{cp[0],cp[1]+1,nums1[cp[0]]+nums2[cp[1]+1]});
+34                visited.add(cp[0]+" "+(cp[1]+1));
+35            }
 36
-37        return ans;
-38        
-39    }
-40}
+37        }
+38        return ans;
+39        
+40    }
+41}
