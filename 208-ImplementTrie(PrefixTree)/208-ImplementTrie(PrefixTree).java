@@ -1,61 +1,56 @@
-// Last updated: 12/31/2025, 12:05:55 PM
+// Last updated: 2/4/2026, 11:56:57 AM
 1class TrieNode{
-2    TrieNode[] children;
+2    HashMap<Character,TrieNode> children;
 3    boolean isEnd;
-4    TrieNode(){
-5        children = new TrieNode[26];
+4    public TrieNode(){
+5        children = new HashMap<>();
 6        isEnd = false;
 7    }
 8}
 9class Trie {
 10    TrieNode root;
-11
-12    public Trie() {
-13        root = new TrieNode();
-14    }
-15    
-16    public void insert(String word) {
-17        TrieNode curr = root;
-18        for (char ch : word.toCharArray()){
-19            int idx = ch-'a';
-20            if (curr.children[idx]==null){
-21                TrieNode nn = new TrieNode();
-22                curr.children[idx] = nn;
-23            }
-24            curr = curr.children[idx];
-25        }
-26        curr.isEnd = true;
-27    }
-28    
-29    public boolean search(String word) {
-30        TrieNode curr = root;
-31        for (char ch : word.toCharArray()){
-32            int idx = ch-'a';
-33            if (curr.children[idx]==null){
-34                return false;
-35            }
-36            curr = curr.children[idx];
-37        }
-38        return curr.isEnd ;
-39    }
-40    
-41    public boolean startsWith(String prefix) {
-42        TrieNode curr = root;
-43        for (char ch : prefix.toCharArray()){
-44            int idx = ch-'a';
-45            if (curr.children[idx]==null){
-46                return false;
-47            }
-48            curr = curr.children[idx];
-49        }
-50        return true ;
-51    }
-52}
-53
-54/**
-55 * Your Trie object will be instantiated and called as such:
-56 * Trie obj = new Trie();
-57 * obj.insert(word);
-58 * boolean param_2 = obj.search(word);
-59 * boolean param_3 = obj.startsWith(prefix);
-60 */
+11    public Trie() {
+12        root = new TrieNode();
+13    }
+14    
+15    public void insert(String word) {
+16        TrieNode curr = root;
+17        for (char ch : word.toCharArray()){
+18            if (!curr.children.containsKey(ch)){
+19                curr.children.put(ch,new TrieNode());
+20            }
+21            curr = curr.children.get(ch);
+22        }
+23        curr.isEnd = true;
+24    }
+25    
+26    public boolean search(String word) {
+27        TrieNode curr = root;
+28        for (char ch : word.toCharArray()){
+29            if (!curr.children.containsKey(ch)){
+30                return false;
+31            }
+32            curr = curr.children.get(ch);
+33        }
+34        return curr.isEnd;
+35    }
+36    
+37    public boolean startsWith(String prefix) {
+38        TrieNode curr = root;
+39        for (char ch : prefix.toCharArray()){
+40            if (!curr.children.containsKey(ch)){
+41                return false;
+42            }
+43            curr = curr.children.get(ch);
+44        }
+45        return true;
+46    }
+47}
+48
+49/**
+50 * Your Trie object will be instantiated and called as such:
+51 * Trie obj = new Trie();
+52 * obj.insert(word);
+53 * boolean param_2 = obj.search(word);
+54 * boolean param_3 = obj.startsWith(prefix);
+55 */
