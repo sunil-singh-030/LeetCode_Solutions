@@ -1,4 +1,4 @@
-// Last updated: 2/10/2026, 10:42:38 AM
+// Last updated: 2/10/2026, 10:47:57 AM
 1/**
 2 * Definition for a binary tree node.
 3 * public class TreeNode {
@@ -21,43 +21,34 @@
 20        q.add(root);
 21        while (!q.isEmpty()){
 22            int size = q.size();
-23            List<Integer> ls = new ArrayList<>();
-24            for (int i=0 ; i<size ; i++){
-25                TreeNode node = q.poll();
-26                ls.add(node.val);
-27                if (node.left!=null){
-28                    q.add(node.left);
-29                }
-30                if (node.right!=null){
-31                    q.add(node.right);
-32                }
-33            }
-34            if (level%2==0){
-35                for (int num : ls){
-36                    if (num%2==0){
+23            int prevVal = 0;
+24            if (level%2==1){
+25                prevVal = Integer.MAX_VALUE;
+26            }
+27            for (int i=0 ; i<size ; i++){
+28                TreeNode node = q.poll();
+29                int val = node.val;
+30                if (level%2==0){
+31                    if (val%2==0 || val<=prevVal){
+32                        return false;
+33                    }
+34                }
+35                else{
+36                    if (val%2==1 || val>=prevVal){
 37                        return false;
 38                    }
 39                }
-40                for (int i=1 ; i<size ; i++){
-41                    if (ls.get(i)<=ls.get(i-1)){
-42                        return false;
-43                    }
-44                }
-45            }
-46            else{
-47                for (int num : ls){
-48                    if (num%2==1){
-49                        return false;
-50                    }
-51                }
-52                for (int i=1 ; i<size ; i++){
-53                    if (ls.get(i)>=ls.get(i-1)){
-54                        return false;
-55                    }
-56                }
-57            }
-58            level++;
-59        }
-60        return true;
-61    }
-62}
+40                prevVal = val;
+41                if (node.left!=null){
+42                    q.add(node.left);
+43                }
+44                if (node.right!=null){
+45                    q.add(node.right);
+46                }
+47            }
+48            
+49            level++;
+50        }
+51        return true;
+52    }
+53}
