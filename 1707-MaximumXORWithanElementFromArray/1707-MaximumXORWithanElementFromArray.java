@@ -1,4 +1,4 @@
-// Last updated: 2/12/2026, 12:01:52 PM
+// Last updated: 2/12/2026, 12:07:45 PM
 1class TrieNode{
 2    TrieNode[] child;
 3    boolean isEnd;
@@ -29,16 +29,16 @@
 28        TrieNode curr = root;
 29
 30        if (curr.child[0] == null && curr.child[1] == null)
-31            return -1;   // no number inserted
+31            return -1;   
 32
 33        int ans = 0;
 34
 35        for (int i = 31; i >= 0; i--){
 36            int bit = (num >> i) & 1;
 37
-38            // try to go opposite bit for max XOR
+38            
 39            if (curr.child[1 - bit] != null){
-40                ans |= (1 << i);   // set ith bit
+40                ans += (int) Math.pow(2,i);  
 41                curr = curr.child[1 - bit];
 42            } else {
 43                curr = curr.child[bit];
