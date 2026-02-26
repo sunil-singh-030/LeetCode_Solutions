@@ -1,4 +1,4 @@
-// Last updated: 2/26/2026, 10:39:20 AM
+// Last updated: 2/26/2026, 10:40:20 AM
 1class Solution {
 2    public int numSteps(String s) {
 3        int cntSteps = 0;
