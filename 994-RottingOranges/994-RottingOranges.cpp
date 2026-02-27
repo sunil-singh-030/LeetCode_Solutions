@@ -1,42 +1,52 @@
-// Last updated: 2/27/2026, 12:21:59 PM
+// Last updated: 2/27/2026, 12:30:21 PM
 1class Solution {
 2public:
 3
-4    int orangesRotting(vector<vector<int>>& grid) {
-5        int m = grid.size();
-6        int n = grid[0].size();
-7        int freshCnt = 0;
-8        queue<pair<int,pair<int,int>>> q;
-9        for (int i=0 ; i<m ; i++){
-10            for (int j=0 ; j<n ; j++){
-11                if (grid[i][j]==1){
-12                    freshCnt++;
-13                }
-14                else if (grid[i][j]==2){
-15                    q.push({0,{i,j}});
-16                }
-17            }
-18        }
-19        int minTime = 0;
-20        while (!q.empty()){
-21            int size = q.size();
-22            for (int i=0 ; i<size ; i++){
-23                auto p = q.front();
-24                q.pop();
-25                int r[] = {1,0,-1,0};
-26                int c[] = {0,1,0,-1};
-27                for (int j=0 ; j<4 ; j++){
-28                    int row = p.second.first+r[j];
-29                    int col = p.second.second+c[j];
-30                    if (row>=0 && col>=0 && row<m && col<n && grid[row][col]==1){
-31                        grid[row][col] = 2;
-32                        freshCnt--;
-33                        minTime = max(minTime,p.first+1);
-34                        q.push({p.first+1,{row,col}});
-35                    }
-36                }
-37            }
-38        }
-39        return freshCnt==0 ? minTime : -1;
-40    }
-41};
+4    struct Node {
+5        int time;
+6        int row;
+7        int col;
+8    };
+9
+10    int orangesRotting(vector<vector<int>>& grid) {
+11        int m = grid.size();
+12        int n = grid[0].size();
+13        int freshCnt = 0;
+14
+15        queue<Node> q;
+16
+17        for (int i = 0; i < m; i++) {
+18            for (int j = 0; j < n; j++) {
+19                if (grid[i][j] == 1) {
+20                    freshCnt++;
+21                }
+22                else if (grid[i][j] == 2) {
+23                    q.push({0, i, j});
+24                }
+25            }
+26        }
+27
+28        int minTime = 0;
+29        int r[] = {1,0,-1,0};
+30        int c[] = {0,1,0,-1};
+31
+32        while (!q.empty()) {
+33            Node p = q.front();
+34            q.pop();
+35
+36            for (int j = 0; j < 4; j++) {
+37                int row = p.row + r[j];
+38                int col = p.col + c[j];
+39
+40                if (row >= 0 && col >= 0 && row < m && col < n && grid[row][col] == 1) {
+41                    grid[row][col] = 2;
+42                    freshCnt--;
+43                    minTime = max(minTime, p.time + 1);
+44                    q.push({p.time + 1, row, col});
+45                }
+46            }
+47        }
+48
+49        return freshCnt == 0 ? minTime : -1;
+50    }
+51};
