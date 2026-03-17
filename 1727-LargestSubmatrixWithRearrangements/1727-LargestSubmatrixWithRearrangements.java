@@ -1,4 +1,4 @@
-// Last updated: 3/17/2026, 10:39:09 AM
+// Last updated: 3/17/2026, 10:39:19 AM
 1class Solution {
 2    public int largestSubmatrix(int[][] matrix) {
 3        // 0 0 1
@@ -26,7 +26,7 @@
 25                maxAns = Math.max(maxAns,temp[j]*(n-j));
 26            }
 27            
-28            System.out.println(maxAns);
+28            
 29        }
 30        return maxAns;
 31    }
