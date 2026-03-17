@@ -1,43 +1,40 @@
-// Last updated: 8/1/2025, 7:12:43 AM
+// Last updated: 3/17/2026, 12:44:00 PM
 class Solution {
     public void nextPermutation(int[] nums) {
-        int n=nums.length;
-        int ind1=-1;
-        int ind2=-1;
-        for (int i=n-1;i>0;i--){
-            if (nums[i]>nums[i-1]){
-                ind1=i-1;
-                break;
-            }
+        int n = nums.length;
+
+        // Step 1: Find first decreasing element from right
+        int i = n - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
         }
-        if (ind1!=-1){
-            for (int j=n-1;j>ind1;j--){
-                if (nums[j]>nums[ind1]){
-                    ind2=j;
-                    break;
-                }
+
+        // Step 2: Find next greater element from right
+        if (i >= 0) {
+            int j = n - 1;
+            while (nums[j] <= nums[i]) {
+                j--;
             }
-            int temp=nums[ind1];
-            nums[ind1]=nums[ind2];
-            nums[ind2]=temp;
-            while (ind1+1<n-1){
-                int temp1=nums[ind1+1];
-                nums[ind1+1]=nums[n-1];
-                nums[n-1]=temp1;
-                ind1++;
-                n--;
-            }
+
+            // Step 3: Swap
+            swap(nums, i, j);
         }
-        else{
-            int index=0;
-            while (index<n-1){
-                int temp1=nums[index];
-                nums[index]=nums[n-1];
-                nums[n-1]=temp1;
-                index++;
-                n--;
-            }
+
+        // Step 4: Reverse the suffix
+        reverse(nums, i + 1, n - 1);
+    }
+
+    private void swap(int[] nums, int a, int b) {
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
+    }
+
+    private void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            swap(nums, start, end);
+            start++;
+            end--;
         }
     }
-    
 }
