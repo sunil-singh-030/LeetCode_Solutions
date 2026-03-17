@@ -1,33 +1,26 @@
-// Last updated: 3/17/2026, 10:39:19 AM
+// Last updated: 3/17/2026, 10:42:03 AM
 1class Solution {
 2    public int largestSubmatrix(int[][] matrix) {
-3        // 0 0 1
-4        // 1 1 2
-5        // 2 1 3
-6
-7        int maxAns = 0;
-8        int m = matrix.length;
-9        int n = matrix[0].length;
-10        int[] arr = new int[n];
-11        for (int i=0 ; i<m ; i++){
-12            for (int j=0 ; j<n ; j++){
-13                if (matrix[i][j]==0){
-14                    arr[j] = 0;
-15                }
-16                else{
-17                    arr[j]++;
-18                }
-19            }
-20            int[] temp = arr.clone();
-21            
-22            Arrays.sort(temp);
-23            //System.out.println(Arrays.toString(temp));
-24            for (int j=0 ; j<n ; j++){
-25                maxAns = Math.max(maxAns,temp[j]*(n-j));
-26            }
-27            
-28            
-29        }
-30        return maxAns;
-31    }
-32}
+3        int maxAns = 0;
+4        int m = matrix.length;
+5        int n = matrix[0].length;
+6        int[] arr = new int[n];
+7        for (int i=0 ; i<m ; i++){
+8            for (int j=0 ; j<n ; j++){
+9                if (matrix[i][j]==0){
+10                    arr[j] = 0;
+11                }
+12                else{
+13                    arr[j]++;
+14                }
+15            }
+16            int[] temp = arr.clone();
+17            
+18            Arrays.sort(temp);
+19            for (int j=0 ; j<n ; j++){
+20                maxAns = Math.max(maxAns,temp[j]*(n-j));
+21            }
+22        }
+23        return maxAns;
+24    }
+25}
