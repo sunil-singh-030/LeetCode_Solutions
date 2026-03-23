@@ -1,4 +1,4 @@
-// Last updated: 3/23/2026, 6:44:22 AM
+// Last updated: 3/23/2026, 6:44:36 AM
 1class Solution {
 2    
 3    public int maxProductPath(int[][] grid) {
@@ -29,27 +29,19 @@
 28            min = Math.min(min,currVal*arr1[1]);
 29            max = Math.max(max,currVal*arr1[0]);
 30            max = Math.max(max,currVal*arr1[1]);
-31            if (c+1<grid[0].length){
-32                long[] arr2 = fn(grid,r,c+1,dp,vis);
-33                min = Math.min(min,currVal*arr2[0]);
-34                min = Math.min(min,currVal*arr2[1]);
-35                max = Math.max(max,currVal*arr2[0]);
-36                max = Math.max(max,currVal*arr2[1]);
-37                
-38            }
+31        }
+32        if (c+1<grid[0].length){
+33            long[] arr2 = fn(grid,r,c+1,dp,vis);
+34            min = Math.min(min,currVal*arr2[0]);
+35            min = Math.min(min,currVal*arr2[1]);
+36            max = Math.max(max,currVal*arr2[0]);
+37            max = Math.max(max,currVal*arr2[1]);
+38            
 39        }
-40        if (c+1<grid[0].length){
-41            long[] arr2 = fn(grid,r,c+1,dp,vis);
-42            min = Math.min(min,currVal*arr2[0]);
-43            min = Math.min(min,currVal*arr2[1]);
-44            max = Math.max(max,currVal*arr2[0]);
-45            max = Math.max(max,currVal*arr2[1]);
-46            
-47        }
-48        vis[r][c] = true;
-49        dp[r][c][0] = min;
-50        dp[r][c][1] = max;
-51        return new long[]{min,max};
-52
-53    }
-54}
+40        vis[r][c] = true;
+41        dp[r][c][0] = min;
+42        dp[r][c][1] = max;
+43        return new long[]{min,max};
+44
+45    }
+46}
