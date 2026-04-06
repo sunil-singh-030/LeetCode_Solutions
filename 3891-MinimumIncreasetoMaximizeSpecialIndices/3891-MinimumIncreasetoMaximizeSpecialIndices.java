@@ -1,4 +1,4 @@
-// Last updated: 4/6/2026, 3:36:42 PM
+// Last updated: 4/6/2026, 3:39:43 PM
 1class Solution {
 2    public long minIncrease(int[] nums) {
 3        int n = nums.length;
@@ -15,28 +15,29 @@
 14    }
 15
 16    public long jaiBabaKi(int[] nums, int idx, int canI, long[][] dp){
-17        
-18        if (idx>=nums.length-1){
-19            return 0;
-20        }
-21        if (dp[idx][canI]!=-1) return dp[idx][canI];
+17        if (idx>=nums.length-1){
+18            return 0;
+19        }
+20        if (dp[idx][canI]!=-1) return dp[idx][canI];
+21
 22        long res = Long.MAX_VALUE/2;
-23
-24        
-25        if (canI==1){
-26            res = jaiBabaKi(nums,idx+1,0,dp);
-27        }
-28        
-29        int req = 0;
-30        if (nums[idx]<=Math.max(nums[idx-1],nums[idx+1])){
-31            req = Math.max(nums[idx-1],nums[idx+1])-nums[idx]+1;
-32        }
-33        long curr = jaiBabaKi(nums,idx+2,canI,dp);
-34        if (curr==Long.MAX_VALUE/2) return res;
-35        res = Math.min(res,req +curr );
-36        return dp[idx][canI] = res;
-37
-38         
-39
-40    }
-41}
+23        if (canI==1){
+24            res = jaiBabaKi(nums,idx+1,0,dp);
+25        }
+26        
+27        int reqHeight = 0;
+28        int maxHeight = Math.max(nums[idx-1],nums[idx+1]);
+29        if (nums[idx]<=maxHeight){
+30            reqHeight = maxHeight-nums[idx]+1;
+31        }
+32        long take = jaiBabaKi(nums,idx+2,canI,dp);
+33        if (take!=Long.MAX_VALUE/2){
+34            res = Math.min(res,reqHeight + take );
+35        }
+36        
+37        return dp[idx][canI] = res;
+38
+39         
+40
+41    }
+42}
