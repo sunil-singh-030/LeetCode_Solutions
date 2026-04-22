@@ -1,4 +1,4 @@
-// Last updated: 2/4/2026, 3:06:58 PM
+// Last updated: 4/22/2026, 9:27:26 AM
 1class TrieNode{
 2    TrieNode[] child;
 3    boolean isEnd;
