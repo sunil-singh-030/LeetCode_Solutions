@@ -1,4 +1,4 @@
-// Last updated: 4/26/2026, 8:30:41 AM
+// Last updated: 4/26/2026, 8:30:55 AM
 1class Solution {
 2    int[] row = {-1,0,1,0};
 3    int[] col = {0,1,0,-1};
@@ -23,11 +23,10 @@
 22        for (int i=0 ; i<m ; i++){
 23            for (int j=0 ; j<n ; j++){
 24                if (!visited[i][j] && hasCycle(grid,i,j,visited,-1,-1)){
-25                    //System.out.println(i+" "+j);
-26                    return true;
-27                }
-28            }
-29        }
-30        return false;
-31    }
-32}
+25                    return true;
+26                }
+27            }
+28        }
+29        return false;
+30    }
+31}
