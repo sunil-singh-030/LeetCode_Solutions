@@ -1,4 +1,4 @@
-// Last updated: 5/3/2026, 4:16:52 PM
+// Last updated: 5/3/2026, 4:17:03 PM
 1class Solution {
 2    public int[] minCost(int[] nums, int[][] queries) {
 3        int n = nums.length;
@@ -38,9 +38,7 @@
 37                ans[i] = left[end+1]-left[st+1];
 38            }
 39        }
-40        // System.out.println(Arrays.toString(right));
-41        // System.out.println(Arrays.toString(left));
-42        return ans;
-43
-44    }
-45}
+40        return ans;
+41
+42    }
+43}
