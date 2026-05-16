@@ -1,38 +1,22 @@
-// Last updated: 8/1/2025, 7:09:07 AM
-class Solution {
-    public int[] topKFrequent(int[] nums, int k) {
-        int n = nums.length;
-        Arrays.sort(nums);
-        int cntdist = 1;
-        for (int i=1 ; i<n ; i++){
-            if (nums[i]!=nums[i-1]){
-                cntdist++;
-            }
-        }
-        //System.out.println(cntdist);
-        int[][] elem = new int[cntdist][2];
-        int ind = 0;
-        int num = nums[0];
-        int c = 1;
-        for (int i=1 ; i<n ; i++){
-            if (nums[i]==num){
-                c++;
-            }
-            else{
-                elem[ind][0] = num;
-                elem[ind][1] = c;
-                num = nums[i];
-                c = 1;
-                ind++;
-            }
-        }
-        elem[ind][0] = num;
-        elem[ind][1] = c;
-        Arrays.sort(elem,(a,b) -> b[1]-a[1]);
-        int[] out = new int[k];
-        for (int i=0 ; i<k ; i++){
-            out[i] = elem[i][0];
-        }
-        return out;
-    }
-}
+// Last updated: 5/16/2026, 12:45:28 PM
+1class Solution {
+2    public int[] topKFrequent(int[] nums, int k) {
+3        HashMap<Integer,Integer> map = new HashMap<>();
+4        for (int num : nums){
+5            map.put(num,map.getOrDefault(num,0)+1);
+6        }
+7        int[][] arr = new int[map.size()][2];
+8        int idx = 0;
+9        for (int key : map.keySet()){
+10            arr[idx][0] = key;
+11            arr[idx][1] = map.get(key);
+12            idx++;
+13        }
+14        Arrays.sort(arr,(a,b)->b[1]-a[1]);
+15        int[] ans = new int[k];
+16        for (int i=0 ; i<k ; i++){
+17            ans[i] = arr[i][0];
+18        }
+19        return ans;
+20    }
+21}
