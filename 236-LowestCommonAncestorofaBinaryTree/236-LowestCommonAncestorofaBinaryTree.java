@@ -1,4 +1,4 @@
-// Last updated: 5/16/2026, 7:13:04 AM
+// Last updated: 5/16/2026, 7:29:58 AM
 1/**
 2 * Definition for a binary tree node.
 3 * public class TreeNode {
@@ -9,26 +9,26 @@
 8 * }
 9 */
 10class Solution {
-11    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-12        if (root==p || root==q){
-13            return root;
-14        }
-15
-16        boolean hasLeft = checkNode(root.left,p,q);
-17        boolean hasRight = checkNode(root.right,p,q);
-18
-19        if (hasLeft && hasRight) return root;
-20        if (hasLeft) return lowestCommonAncestor(root.left,p,q);
-21        return lowestCommonAncestor(root.right,p,q);
-22    }
-23    public boolean checkNode(TreeNode curr, TreeNode p, TreeNode q){
-24        if (curr==null){
-25            return false;
-26        }
-27        if (curr==p || curr==q){
-28            return true;
-29        }
-30
-31        return checkNode(curr.left,p,q) || checkNode(curr.right,p,q);
-32    }
-33}
+11    TreeNode ans = null;
+12
+13    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+14        dfs(root, p, q);
+15        return ans;
+16    }
+17
+18    private boolean dfs(TreeNode curr, TreeNode p, TreeNode q) {
+19        if (curr == null) return false;
+20
+21        boolean left = dfs(curr.left, p, q);
+22        boolean right = dfs(curr.right, p, q);
+23        boolean mid = (curr == p || curr == q);
+24
+25        // If any two of the three flags are true, current node is LCA
+26        if ((mid && left) || (mid && right) || (left && right)) {
+27            ans = curr;
+28        }
+29
+30        return mid || left || right;
+31    }
+32}
+33
