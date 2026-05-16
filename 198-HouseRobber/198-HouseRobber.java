@@ -1,18 +1,15 @@
-// Last updated: 5/16/2026, 11:07:34 AM
+// Last updated: 5/16/2026, 11:12:07 AM
 1class Solution {
 2    public int rob(int[] nums) {
 3        int n = nums.length;
 4        int[] dp = new int[n+1];
-5        Arrays.fill(dp,-1);
-6        return helper(nums,0,dp);
-7    }
-8    public int helper(int[] nums, int idx, int[] dp){
-9        if (idx>=nums.length){
-10            return 0;
-11        }
-12        if (dp[idx]!=-1) return dp[idx];
-13        int skip = helper(nums,idx+1,dp);
-14        int rob = nums[idx] + helper(nums,idx+2,dp);
-15        return dp[idx] = Math.max(skip,rob);
-16    }
-17}
+5        dp[n-1] = nums[n-1];
+6        for (int i=n-2 ; i>=0 ; i--){
+7            int skip = dp[i+1];
+8            int rob = nums[i] + dp[i+2];
+9            dp[i] = Math.max(skip,rob);
+10        }
+11        return dp[0];
+12    }
+13    
+14}
