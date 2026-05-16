@@ -1,40 +1,25 @@
-// Last updated: 8/1/2025, 7:10:42 AM
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
- */
-public class Solution {
-    public boolean hasCycle(ListNode head) {
-        // List<ListNode> ls = new ArrayList();
-        // ListNode curr = head;
-        // boolean flag = false;
-        // while (!flag && curr!=null){
-        //     if (ls.contains(curr)){
-        //         return true;
-        //     }
-        //     else{
-        //         ls.add(curr);
-        //         curr = curr.next;
-        //     }
-        // }
-        // return false;
-
-        ListNode slow = head;
-        ListNode fast = head;
-        while (fast!=null && fast.next!=null){
-            slow = slow.next;
-            fast = fast.next.next;
-            if (slow==fast){
-                return true;
-            }
-        }
-        return false;
-    }
-}
+// Last updated: 5/16/2026, 9:47:13 PM
+1/**
+2 * Definition for singly-linked list.
+3 * class ListNode {
+4 *     int val;
+5 *     ListNode next;
+6 *     ListNode(int x) {
+7 *         val = x;
+8 *         next = null;
+9 *     }
+10 * }
+11 */
+12public class Solution {
+13    public boolean hasCycle(ListNode head) {
+14        if (head==null || head.next==null) return false;
+15        ListNode slow = head;
+16        ListNode fast = head;
+17        while (fast!=null && fast.next!=null){
+18            slow = slow.next;
+19            fast = fast.next.next;
+20            if (slow==fast) return true;
+21        }
+22        return false;
+23    }
+24}
