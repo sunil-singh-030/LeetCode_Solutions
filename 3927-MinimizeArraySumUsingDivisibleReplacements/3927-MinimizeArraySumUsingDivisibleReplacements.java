@@ -1,4 +1,4 @@
-// Last updated: 5/16/2026, 4:42:06 PM
+// Last updated: 5/16/2026, 4:43:51 PM
 1class Solution {
 2    public long minArraySum(int[] nums) {
 3        // 2 3 4 8
@@ -9,22 +9,21 @@
 8            map.put(num,map.getOrDefault(num,0)+1);
 9        }
 10        long minSum = 0;
-11        boolean[] vis = new boolean[nums[n-1]+1];
-12        vis[0] = true;
-13        for (int i=0 ; i<n ; i++){
-14            int num = nums[i];
-15            if (!vis[num] && map.containsKey(num)){
-16                minSum += ((long) map.get(num))*((long) num);
-17                map.remove(num);
-18                for (int j=num+num ; j<=nums[n-1] ; j+=num){
-19                    if (map.containsKey(j)){
-20                        minSum += ((long) map.get(j))*((long) num);
-21                        map.remove(j);
-22                    }
-23                    vis[j] = true;
-24                }
-25            }
-26        }
-27        return minSum;
-28    }
-29}
+11        
+12        for (int i=0 ; i<n ; i++){
+13            int num = nums[i];
+14            if (map.containsKey(num)){
+15                minSum += ((long) map.get(num))*((long) num);
+16                map.remove(num);
+17                for (int j=num+num ; j<=nums[n-1] ; j+=num){
+18                    if (map.containsKey(j)){
+19                        minSum += ((long) map.get(j))*((long) num);
+20                        map.remove(j);
+21                    }
+22                    
+23                }
+24            }
+25        }
+26        return minSum;
+27    }
+28}
