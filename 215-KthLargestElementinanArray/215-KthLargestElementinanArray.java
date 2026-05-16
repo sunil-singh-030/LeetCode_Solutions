@@ -1,19 +1,8 @@
-// Last updated: 9/29/2025, 6:32:39 AM
-class Solution {
-    public int findKthLargest(int[] nums, int k) {
-        return kth_largest_ele(nums,k);
-    }
-    public static int kth_largest_ele(int[] arr, int k ) {
-		PriorityQueue<Integer> pq = new PriorityQueue<>();
-		for (int i=0; i<k ; i++) {
-			pq.add(arr[i]);
-		}
-		for (int i=k ; i<arr.length ; i++) {
-			if (arr[i]>pq.peek()) {
-				pq.poll();
-				pq.add(arr[i]);
-			}
-		}
-		return pq.peek();
-	}
-}
+// Last updated: 5/16/2026, 12:39:00 PM
+1class Solution {
+2    public int findKthLargest(int[] nums, int k) {
+3        int n = nums.length;
+4        Arrays.sort(nums);
+5        return nums[n-k];
+6    }
+7}
