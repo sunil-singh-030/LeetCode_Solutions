@@ -1,12 +1,18 @@
-// Last updated: 5/16/2026, 6:33:13 AM
+// Last updated: 5/16/2026, 11:01:55 AM
 1class Solution {
 2    public int findMin(int[] nums) {
-3        int min=5001;
-4        for (int i:nums){
-5            if(i<min){
-6                min=i;
-7            }
-8        }
-9        return min;
-10    }
-11}
+3        int left = 0;
+4        int right = nums.length - 1;
+5        while (left < right) {
+6            int mid = left + (right - left) / 2;
+7            if (nums[mid] > nums[right]) {
+8                left = mid + 1;
+9            } else if (nums[mid] < nums[right]) {
+10                right = mid;
+11            } else {
+12                right--;
+13            }
+14        }
+15        return nums[left];
+16    }
+17}
