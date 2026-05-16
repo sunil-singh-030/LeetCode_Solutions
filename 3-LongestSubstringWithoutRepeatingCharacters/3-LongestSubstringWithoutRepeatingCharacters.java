@@ -1,39 +1,32 @@
-// Last updated: 10/1/2025, 7:06:27 AM
-class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        int mlen = 0;
-        int n = s.length();
-        Map<Character,Integer> map = new HashMap<>();
-        int si = 0;
-        int ci = 0;
-        while (ci<n){
-            char curr = s.charAt(ci);
-            int cnt = map.getOrDefault(curr,0);
-            if (cnt==0){
-                map.put(curr,1);
-            }
-            else{
-                mlen = Math.max(mlen,ci-si);
-                while (true){
-                    char ch = s.charAt(si);
-                    if (ch==curr){
-                        cnt--;
-                    }
-                    else{
-                        map.put(ch,map.getOrDefault(ch,0)-1);
-                    }
-                    si++;
-                    if (cnt==0){
-                        break;
-                    }
-                }
-                map.put(curr,1);
-            }
-            ci++;
-            //System.out.println(ci+" "+si+" "+mlen);
-        }
-        //System.out.println(ci+" "+si+" "+mlen);
-        mlen = Math.max(mlen,ci-si);
-        return mlen;
-    }
-}
+// Last updated: 5/16/2026, 7:01:09 AM
+1class Solution {
+2    public int lengthOfLongestSubstring(String s) {
+3        int n = s.length();
+4        HashMap<Character,Integer> map = new HashMap<>();
+5
+6        int si = 0;
+7        int ci = 0;
+8        int maxLen = 0;
+9
+10        while (ci<n){
+11            char ch = s.charAt(ci);
+12            map.put(ch,map.getOrDefault(ch,0)+1);
+13
+14            while (map.get(ch)>1){
+15                char stCh = s.charAt(si);
+16                int freq = map.get(stCh);
+17                if (freq==1){
+18                    map.remove(stCh);
+19                }
+20                else{
+21                    map.put(stCh,freq-1);
+22                }
+23                si++;
+24            }
+25
+26            maxLen = Math.max(maxLen,ci-si+1);
+27            ci++;
+28        }
+29        return maxLen;
+30    }
+31}
