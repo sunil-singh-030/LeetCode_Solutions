@@ -1,47 +1,29 @@
-// Last updated: 8/1/2025, 7:10:41 AM
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> preorder = new ArrayList<>();
-        TreeNode curr = root;
-        while (curr!=null){
-            int val = curr.val;
-            if (curr.left==null){
-                preorder.add(val);
-                curr = curr.right;
-            }
-            else{
-                TreeNode temp = curr.left;
-                while (temp.right!=null && temp.right!=curr){
-                    temp = temp.right;
-                }
-                if (temp.right==curr){
-                    temp.right = null;
-                    curr = curr.right;
-                }
-                else{
-                    preorder.add(val);
-                    temp.right = curr;
-                    curr = curr.left;
-                }
-                
-            }
-        }
-        return preorder;
-    }
-    
-}
+// Last updated: 5/17/2026, 9:40:30 PM
+1/**
+2 * Definition for a binary tree node.
+3 * public class TreeNode {
+4 *     int val;
+5 *     TreeNode left;
+6 *     TreeNode right;
+7 *     TreeNode() {}
+8 *     TreeNode(int val) { this.val = val; }
+9 *     TreeNode(int val, TreeNode left, TreeNode right) {
+10 *         this.val = val;
+11 *         this.left = left;
+12 *         this.right = right;
+13 *     }
+14 * }
+15 */
+16class Solution {
+17    public List<Integer> preorderTraversal(TreeNode root) {
+18        List<Integer> ans = new ArrayList<>();
+19        helper(root,ans);
+20        return ans;
+21    }
+22    public void helper(TreeNode root, List<Integer> ans){
+23        if (root==null) return;
+24        ans.add(root.val);
+25        helper(root.left,ans);
+26        helper(root.right,ans);
+27    }
+28}
