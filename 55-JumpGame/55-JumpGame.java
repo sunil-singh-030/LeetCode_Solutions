@@ -1,25 +1,24 @@
-// Last updated: 5/17/2026, 7:07:35 AM
+// Last updated: 5/17/2026, 7:11:50 AM
 1class Solution {
 2    public boolean canJump(int[] nums) {
 3        int n = nums.length;
-4        boolean[] canI = new boolean[n];
-5        canI[n-1] = true;
-6        for (int i=n-2 ; i>=0 ; i--){
-7            int jump = nums[i];
-8            if (i+jump>=n-1){
-9                canI[i] = true;
-10            }
-11            else{
-12                
-13                for (int j=i+1 ; j<=i+jump ; j++){
-14                    if (canI[j]){
-15                        canI[i] = true;
-16                        break;
-17                    }
-18                }
-19            }
-20            
-21        }
-22        return canI[0];
-23    }
-24}
+4        int[] dp = new int[n];
+5        Arrays.fill(dp,-1);
+6        return helper(nums,0,dp);
+7    }
+8    public boolean helper(int[] nums, int idx, int[] dp){
+9        if (idx>=nums.length-1){
+10            return true;
+11        }
+12        if (dp[idx]!=-1) return dp[idx]==1;
+13        int jumps = nums[idx];
+14        for (int i=idx+1 ; i<=idx+jumps ; i++){
+15            if (helper(nums,i,dp)) {
+16                dp[idx] = 1;
+17                return true;
+18            }
+19        }
+20        dp[idx] = 0;
+21        return false;
+22    }
+23}
