@@ -1,4 +1,4 @@
-// Last updated: 5/18/2026, 10:15:36 PM
+// Last updated: 5/18/2026, 10:15:39 PM
 1class Solution {
 2    public int countKthRoots(int l, int r, int k) {
 3        System.out.println(helper(r+1,k));
