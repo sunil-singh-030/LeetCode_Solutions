@@ -1,37 +1,40 @@
-// Last updated: 5/18/2026, 12:21:14 PM
+// Last updated: 5/18/2026, 12:33:49 PM
 1class Solution {
 2    public int characterReplacement(String s, int k) {
-3        // AABABBA K=1
-4        int n = s.length();
-5        HashMap<Character,Integer> map = new HashMap<>();
-6        int maxLen = 1;
-7        int ci = 0;
-8        int si = 0;
-9
-10        while (ci<n){
-11            char ch = s.charAt(ci);
-12            map.put(ch,map.getOrDefault(ch,0)+1);
-13            while (helper(map,ci-si+1)>k){
-14                char prev = s.charAt(si);
-15                int freq = map.get(prev);
-16                if (freq==1){
-17                    map.remove(prev);
-18                }
-19                else{
-20                    map.put(prev,freq-1);
-21                }
-22                si++;
-23            }
-24            maxLen = Math.max(maxLen,ci-si+1);
-25            ci++;
-26        }
-27        return maxLen;
-28    }
-29    public int helper(HashMap<Character,Integer> map, int cnt){
-30        int max = 0;
-31        for (char key : map.keySet()){
-32            max = Math.max(max,map.get(key));
-33        }
-34        return cnt-max;
-35    }
-36}
+3        int [] arr=new int[26];
+4        for (int i=0;i<s.length();i++){
+5            arr[s.charAt(i)-'A']++;
+6        }
+7        int ans=1;
+8        for (int i=0;i<26;i++){
+9            if (arr[i]>0){
+10                int out=countsamelenstr(s,k,(char) (i+65));
+11                ans=Math.max(ans,out);
+12            }
+13        }
+14        return ans;
+15    }
+16    public static int countsamelenstr(String s,int k,char ch){
+17        int ans=1;
+18        int si=0;
+19        int ci=0;
+20        int flip=0;
+21        while (ci<s.length()){
+22            // grow
+23            if (s.charAt(ci)!=ch){
+24                flip++;
+25            }
+26            // shrink
+27            while (flip>k){
+28                if (s.charAt(si)!=ch){
+29                    flip--;
+30                }
+31                si++;
+32            }
+33            // ans update
+34            ans=Math.max(ans,ci-si+1);
+35            ci++;
+36        }
+37        return ans;
+38    }
+39}
