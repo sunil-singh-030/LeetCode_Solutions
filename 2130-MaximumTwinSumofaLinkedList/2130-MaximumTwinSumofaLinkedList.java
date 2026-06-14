@@ -1,4 +1,4 @@
-// Last updated: 6/14/2026, 6:15:40 AM
+// Last updated: 6/14/2026, 6:33:51 AM
 1/**
 2 * Definition for singly-linked list.
 3 * public class ListNode {
@@ -19,18 +19,32 @@
 18            temp = temp.next;
 19        }
 20        n /= 2;
-21        temp = head;
-22        while (n-->0){
-23            ls.add(temp.val);
-24            temp = temp.next;
-25        }
-26        int idx = ls.size()-1;
-27        int maxSum = 0;
-28        while (temp!=null){
-29            maxSum = Math.max(maxSum,ls.get(idx)+temp.val);
-30            idx--;
-31            temp = temp.next;
-32        }
-33        return maxSum;
-34    }
-35}
+21        ListNode prev = null;
+22        ListNode curr = head;
+23        while (n-->0){
+24            prev = curr;
+25            curr = curr.next;
+26            
+27        }
+28        ListNode mid = prev;
+29        prev = null;
+30        while (curr!=null){
+31            ListNode tempNode = curr.next;
+32            curr.next = prev;
+33            prev = curr;
+34            curr = tempNode;
+35        }
+36        mid.next = prev;
+37
+38        ListNode node1 = head;
+39        ListNode node2 = prev;
+40        int maxSum = 0;
+41        while (node2!=null){
+42            maxSum = Math.max(maxSum,node1.val+node2.val);
+43            node1 = node1.next;
+44            node2 = node2.next;
+45        }
+46        return maxSum;
+47        
+48    }
+49}
