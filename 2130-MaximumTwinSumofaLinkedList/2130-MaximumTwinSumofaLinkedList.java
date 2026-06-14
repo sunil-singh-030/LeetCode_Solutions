@@ -1,4 +1,4 @@
-// Last updated: 6/14/2026, 6:11:51 AM
+// Last updated: 6/14/2026, 6:15:40 AM
 1/**
 2 * Definition for singly-linked list.
 3 * public class ListNode {
@@ -13,14 +13,24 @@
 12    public int pairSum(ListNode head) {
 13        List<Integer> ls = new ArrayList<>();
 14        ListNode temp = head;
-15        while (temp!=null){
-16            ls.add(temp.val);
-17            temp = temp.next;
-18        }
-19        int maxSum = 0;
-20        for (int i=0 ; i<ls.size()/2 ; i++){
-21            maxSum = Math.max(maxSum,ls.get(i)+ls.get(ls.size()-1-i));
-22        }
-23        return maxSum;
-24    }
-25}
+15        int n = 0;
+16        while (temp!=null){
+17            n++;
+18            temp = temp.next;
+19        }
+20        n /= 2;
+21        temp = head;
+22        while (n-->0){
+23            ls.add(temp.val);
+24            temp = temp.next;
+25        }
+26        int idx = ls.size()-1;
+27        int maxSum = 0;
+28        while (temp!=null){
+29            maxSum = Math.max(maxSum,ls.get(idx)+temp.val);
+30            idx--;
+31            temp = temp.next;
+32        }
+33        return maxSum;
+34    }
+35}
