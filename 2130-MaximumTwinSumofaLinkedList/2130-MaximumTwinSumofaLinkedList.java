@@ -1,4 +1,4 @@
-// Last updated: 6/14/2026, 6:33:51 AM
+// Last updated: 6/14/2026, 6:34:10 AM
 1/**
 2 * Definition for singly-linked list.
 3 * public class ListNode {
@@ -11,40 +11,39 @@
 10 */
 11class Solution {
 12    public int pairSum(ListNode head) {
-13        List<Integer> ls = new ArrayList<>();
-14        ListNode temp = head;
-15        int n = 0;
-16        while (temp!=null){
-17            n++;
-18            temp = temp.next;
-19        }
-20        n /= 2;
-21        ListNode prev = null;
-22        ListNode curr = head;
-23        while (n-->0){
-24            prev = curr;
-25            curr = curr.next;
-26            
-27        }
-28        ListNode mid = prev;
-29        prev = null;
-30        while (curr!=null){
-31            ListNode tempNode = curr.next;
-32            curr.next = prev;
-33            prev = curr;
-34            curr = tempNode;
-35        }
-36        mid.next = prev;
-37
-38        ListNode node1 = head;
-39        ListNode node2 = prev;
-40        int maxSum = 0;
-41        while (node2!=null){
-42            maxSum = Math.max(maxSum,node1.val+node2.val);
-43            node1 = node1.next;
-44            node2 = node2.next;
-45        }
-46        return maxSum;
-47        
-48    }
-49}
+13        ListNode temp = head;
+14        int n = 0;
+15        while (temp!=null){
+16            n++;
+17            temp = temp.next;
+18        }
+19        n /= 2;
+20        ListNode prev = null;
+21        ListNode curr = head;
+22        while (n-->0){
+23            prev = curr;
+24            curr = curr.next;
+25            
+26        }
+27        ListNode mid = prev;
+28        prev = null;
+29        while (curr!=null){
+30            ListNode tempNode = curr.next;
+31            curr.next = prev;
+32            prev = curr;
+33            curr = tempNode;
+34        }
+35        mid.next = prev;
+36
+37        ListNode node1 = head;
+38        ListNode node2 = prev;
+39        int maxSum = 0;
+40        while (node2!=null){
+41            maxSum = Math.max(maxSum,node1.val+node2.val);
+42            node1 = node1.next;
+43            node2 = node2.next;
+44        }
+45        return maxSum;
+46        
+47    }
+48}
