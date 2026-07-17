@@ -1,37 +1,31 @@
-// Last updated: 10/19/2025, 9:11:22 AM
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public int maxDepth(TreeNode root) {
-        int cntOfLevel = 0;
-        if (root==null){
-            return 0;
-        }
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
-        while (!q.isEmpty()){
-            cntOfLevel++;
-            int size = q.size();
-            for (int i=0 ; i<size ; i++){
-                TreeNode currNode = q.poll();
-                if (currNode.left!=null) q.offer(currNode.left);
-                if (currNode.right!=null) q.offer(currNode.right);
-            }	
-        }
-        return cntOfLevel;
-    }
-    
-}
+// Last updated: 7/17/2026, 9:45:35 PM
+1/**
+2 * Definition for a binary tree node.
+3 * public class TreeNode {
+4 *     int val;
+5 *     TreeNode left;
+6 *     TreeNode right;
+7 *     TreeNode() {}
+8 *     TreeNode(int val) { this.val = val; }
+9 *     TreeNode(int val, TreeNode left, TreeNode right) {
+10 *         this.val = val;
+11 *         this.left = left;
+12 *         this.right = right;
+13 *     }
+14 * }
+15 */
+16class Solution {
+17    public int maxDepth(TreeNode root) {
+18        return helper(root);
+19    }
+20
+21    public int helper(TreeNode currNode){
+22
+23        if (currNode==null){
+24            return 0;
+25        }
+26        int leftChild = helper(currNode.left);
+27        int rightChild = helper(currNode.right);
+28        return Math.max(leftChild,rightChild) + 1;	
+29    }
+30}
